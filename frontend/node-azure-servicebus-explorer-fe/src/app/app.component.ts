@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'node-azure-servicebus-explorer-fe';
 
-  topics = null;
+  messages = null;
 
   apiUrl = 'http://localhost:3000';
 
@@ -18,8 +18,8 @@ export class AppComponent {
   }
 
   constructor(private http: HttpClient) {
-    this.getTopics().subscribe( (topics) => {
-      this.topics = topics;
+    this.getTopics().subscribe( (msgs) => {
+      this.messages = msgs;
     });
   }
 

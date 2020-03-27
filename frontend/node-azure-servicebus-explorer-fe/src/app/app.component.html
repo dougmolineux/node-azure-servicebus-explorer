@@ -331,11 +331,11 @@
   </div>
 
   <!-- Resources -->
-  <h2>Topics</h2>
-  <p>Azure Service Bus Topic Names</p>
+  <h2>Azure Service Bus Topic Messages</h2>
 
-  <ul *ngFor="let topic of topics">
-    <li>{{ topic.name }}</li>
+  <div *ngIf="!messages">Loading...</div>
+  <ul *ngFor="let msg of messages">
+    <li>{{ msg[0].body }}</li>
   </ul>
 
   <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">

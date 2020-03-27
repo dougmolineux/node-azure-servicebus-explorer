@@ -7,10 +7,11 @@ const connectionString = process.env.SERVICE_BUS_CONNECTION_STRING;
 const topicName = process.env.TOPIC_NAME;
 const subscriptionName = process.env.SUBSCRIPTION_NAME;
 
-async function main() {
+exports.peek = async() => {
 
   const sbClient = ServiceBusClient.createFromConnectionString(connectionString);
   const subClient = sbClient.createSubscriptionClient(topicName, subscriptionName);
+  const msgArr = [];
 
   try {
     for (let i = 0; i < 20; i++) {
@@ -19,15 +20,17 @@ async function main() {
         console.log("No more messages to peek");
         break;
       }
+      msgArr.push(messages);
       console.log(`Peeking message #${i}: ${messages[0].body}`);
     }
     await subClient.close();
   } finally {
     await sbClient.close();
+    return msgArr;
   }
 }
 
-main().catch((err) => {
-  console.log("Error occurred: ", err);
-});
+// main().catch((err) => {
+//   console.log("Error occurred: ", err);
+// });
 
