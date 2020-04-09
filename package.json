@@ -4,21 +4,16 @@
   "description": "",
   "main": "index.js",
   "paths": {
+    "backend": "backend",
     "frontend": "frontend/node-azure-servicebus-explorer-fe"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run backend & npm run frontend",
-    "setup": "npm i && cd $npm_package_paths_frontend && npm i",
+    "setup": "cd $npm_package_paths_backend && npm i && cd ../$npm_package_paths_frontend && npm i",
     "backend": "node backend/server.js",
     "frontend": "cd frontend/node-azure-servicebus-explorer-fe && ng serve"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@azure/service-bus": "^1.1.5",
-    "@koa/cors": "^3.0.0",
-    "dotenv": "^8.2.0",
-    "koa": "^2.11.0"
-  }
+  "license": "ISC"
 }
