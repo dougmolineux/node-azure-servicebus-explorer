@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "paths": {
+    "frontend": "frontend/node-azure-servicebus-explorer-fe"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run backend & npm run frontend",
+    "setup": "npm i && cd $npm_package_paths_frontend && npm i",
     "backend": "node backend/server.js",
     "frontend": "cd frontend/node-azure-servicebus-explorer-fe && ng serve"
   },
