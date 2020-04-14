@@ -1,7 +1,9 @@
 {
   "name": "node-azure-servicebus-explorer-be",
   "version": "0.0.0",
-  "scripts": {},
+  "scripts": {
+    "start": "node server.js"
+  },
   "private": true,
   "dependencies": {
     "@azure/service-bus": "^1.1.5",

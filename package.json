@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run backend & npm run frontend",
     "setup": "cd $npm_package_paths_backend && npm i && cd ../$npm_package_paths_frontend && npm i",
-    "backend": "node backend/server.js",
+    "backend": "cd $npm_package_paths_backend && npm start",
     "frontend": "cd frontend/node-azure-servicebus-explorer-fe && ng serve"
   },
   "author": "",
