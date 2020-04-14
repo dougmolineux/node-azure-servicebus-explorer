@@ -12,7 +12,7 @@
     "start": "npm run backend & npm run frontend",
     "setup": "cd $npm_package_paths_backend && npm i && cd ../$npm_package_paths_frontend && npm i",
     "backend": "cd $npm_package_paths_backend && npm start",
-    "frontend": "cd frontend/node-azure-servicebus-explorer-fe && ng serve"
+    "frontend": "cd $npm_package_paths_frontend && npm start"
   },
   "author": "",
   "license": "ISC"
