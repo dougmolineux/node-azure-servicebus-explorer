@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "paths": {
+    "backend": "backend",
+    "frontend": "frontend/node-azure-servicebus-explorer-fe"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run backend & npm run frontend",
-    "backend": "node backend/server.js",
-    "frontend": "cd frontend/node-azure-servicebus-explorer-fe && ng serve"
+    "install-backend": "cd $npm_package_paths_backend && npm i",
+    "install-frontend": "cd $npm_package_paths_frontend && npm i",
+    "install-app": "npm run install-backend && npm run install-frontend",
+    "backend": "cd $npm_package_paths_backend && npm start",
+    "frontend": "cd $npm_package_paths_frontend && npm start"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@azure/service-bus": "^1.1.5",
-    "@koa/cors": "^3.0.0",
-    "dotenv": "^8.2.0",
-    "koa": "^2.11.0"
-  }
+  "license": "ISC"
 }

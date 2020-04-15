@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const cors = require('@koa/cors');
-const topicPeek = require('../topic-peek');
+const topicPeek = require('./topic-peek');
 
 const app = new Koa();
 
