@@ -5,7 +5,7 @@
   "main": "index.js",
   "paths": {
     "backend": "backend",
-    "frontend": "frontend/node-azure-servicebus-explorer-fe"
+    "frontend": "frontend"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
