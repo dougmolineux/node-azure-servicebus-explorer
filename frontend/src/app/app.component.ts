@@ -14,7 +14,7 @@ export class AppComponent {
   apiUrl = 'http://localhost:3000';
 
   getTopics() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl + '/peek');
   }
 
   constructor(private http: HttpClient) {
