@@ -8,13 +8,15 @@
     "frontend": "frontend"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run backend & npm run frontend",
     "install-backend": "cd $npm_package_paths_backend && npm i",
     "install-frontend": "cd $npm_package_paths_frontend && npm i",
     "install-app": "npm run install-backend && npm run install-frontend",
-    "backend": "cd $npm_package_paths_backend && npm start",
-    "frontend": "cd $npm_package_paths_frontend && npm start"
+    "test-backend": "cd $npm_package_paths_backend && npm test",
+    "test-frontend": "cd $npm_package_paths_frontend && npm test",
+    "test": "npm run test-backend & npm run test-frontend",
+    "start-backend": "cd $npm_package_paths_backend && npm start",
+    "start-frontend": "cd $npm_package_paths_frontend && npm start",
+    "start": "npm run start-backend & npm run start-frontend"
   },
   "author": "",
   "license": "ISC"

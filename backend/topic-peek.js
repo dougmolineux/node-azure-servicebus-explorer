@@ -29,8 +29,3 @@ exports.peek = async() => {
     return msgArr;
   }
 }
-
-// main().catch((err) => {
-//   console.log("Error occurred: ", err);
-// });
-
