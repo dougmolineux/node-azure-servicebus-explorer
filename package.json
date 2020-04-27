@@ -8,19 +8,16 @@
     "frontend": "frontend"
   },
   "scripts": {
-    "test": "cd $npm_package_paths_backend && mocha --exit --timeout 15000 --recursive *.spec.js",
-    "start": "npm run backend & npm run frontend",
     "install-backend": "cd $npm_package_paths_backend && npm i",
     "install-frontend": "cd $npm_package_paths_frontend && npm i",
     "install-app": "npm run install-backend && npm run install-frontend",
-    "backend": "cd $npm_package_paths_backend && forever server.js",
-    "frontend": "cd $npm_package_paths_frontend && npm start"
+    "test-backend": "cd $npm_package_paths_backend && npm test",
+    "test-frontend": "cd $npm_package_paths_frontend && npm test",
+    "test": "npm run test-backend & npm run test-frontend",
+    "start-backend": "cd $npm_package_paths_backend && npm start",
+    "start-frontend": "cd $npm_package_paths_frontend && npm start",
+    "start": "npm run start-backend & npm run start-frontend"
   },
   "author": "",
-  "devDependencies": {
-    "mocha": "^7.1.1"
-  },
-  "dependencies": {
-    "forever": "^2.0.0"
-  }
+  "license": "ISC"
 }
