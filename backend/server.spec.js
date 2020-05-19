@@ -10,19 +10,18 @@ const mockData = require('./helpers/mockData');
 const expect = chai.expect;
 
 describe('server.js', () => {
-
   let sandbox = sinon.SinonSandbox;
 
-  beforeEach( () => {
+  beforeEach(() => {
     sandbox = sinon.createSandbox();
   });
 
-  afterEach( () => {
+  afterEach(() => {
     sandbox.restore();
   });
 
   it('peek should call topicPeek', async () => {
-    sandbox.stub(topicPeek, "peek").callsFake( () => mockData.mock);
+    sandbox.stub(topicPeek, 'peek').callsFake(() => mockData.mock);
     const myServer = await request(server.callback());
     const rawResponse = await myServer.get('/peek');
     const response = JSON.parse(rawResponse.text);
@@ -30,11 +29,11 @@ describe('server.js', () => {
   });
 
   it('set-env', async () => {
-    sandbox.stub(fs, "writeFile").callsFake( () => Promise.resolve());
+    sandbox.stub(fs, 'writeFile').callsFake(() => Promise.resolve());
     const envVars = {
-      connString: "newConnString",
-      topic: "newTopic",
-      sub: "newSubscription"
+      connString: 'newConnString',
+      topic: 'newTopic',
+      sub: 'newSubscription',
     };
     const myServer = await request(server.callback());
     const rawResponse = await myServer.post('/set-env').send(envVars);
@@ -43,5 +42,4 @@ describe('server.js', () => {
     expect(response.topic).to.equal(envVars.topic);
     expect(response.sub).to.equal(envVars.sub);
   });
-
 });

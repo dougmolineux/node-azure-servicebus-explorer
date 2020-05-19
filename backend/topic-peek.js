@@ -1,23 +1,27 @@
-const { ServiceBusClient } = require("@azure/service-bus");
+const { ServiceBusClient } = require('@azure/service-bus');
 
 // Load the .env file if it exists
-require("dotenv").config();
+require('dotenv').config();
 
 const connectionString = process.env.SERVICE_BUS_CONNECTION_STRING;
 const topicName = process.env.TOPIC_NAME;
 const subscriptionName = process.env.SUBSCRIPTION_NAME;
 
-exports.peek = async() => {
-
-  const sbClient = ServiceBusClient.createFromConnectionString(connectionString);
-  const subClient = sbClient.createSubscriptionClient(topicName, subscriptionName);
+exports.peek = async () => {
+  const sbClient = ServiceBusClient.createFromConnectionString(
+    connectionString
+  );
+  const subClient = sbClient.createSubscriptionClient(
+    topicName,
+    subscriptionName
+  );
   const msgArr = [];
 
   try {
     for (let i = 0; i < 20; i++) {
       const messages = await subClient.peek();
       if (!messages.length) {
-        console.log("No more messages to peek");
+        console.log('No more messages to peek');
         break;
       }
       msgArr.push(messages);
@@ -28,4 +32,4 @@ exports.peek = async() => {
     await sbClient.close();
     return msgArr;
   }
-}
+};

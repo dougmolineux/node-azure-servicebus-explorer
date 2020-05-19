@@ -1,11 +1,11 @@
-  <input type="text" placeholder="Connection String" />
-  <input type="text" placeholder="Topic Name" />
-  <input type="text" placeholder="Subscription Name" />
-  <button>Update Service Bus Connection</button>
-  <button>Restart Server</button>
-  <h2>Azure Service Bus Topic Messages</h2>
-  <div *ngIf="!messages">Loading...</div>
-  <ul *ngFor="let msg of messages">
-    <li>{{ msg[0].body }}</li>
-  </ul>
+<input type="text" placeholder="Connection String" />
+<input type="text" placeholder="Topic Name" />
+<input type="text" placeholder="Subscription Name" />
+<button>Update Service Bus Connection</button>
+<button>Restart Server</button>
+<h2>Azure Service Bus Topic Messages</h2>
+<div *ngIf="!messages">Loading...</div>
+<ul *ngFor="let msg of messages">
+  <li>{{ msg[0].body }}</li>
+</ul>
 <!-- <router-outlet></router-outlet> -->

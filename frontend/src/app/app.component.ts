@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'node-azure-servicebus-explorer-fe';
@@ -18,9 +18,8 @@ export class AppComponent {
   }
 
   constructor(private http: HttpClient) {
-    this.getTopics().subscribe( (msgs) => {
+    this.getTopics().subscribe((msgs) => {
       this.messages = msgs;
     });
   }
-
 }

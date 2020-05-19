@@ -1,7 +1,7 @@
-const { ServiceBusClient } = require("@azure/service-bus");
+const { ServiceBusClient } = require('@azure/service-bus');
 
 // Load the .env file if it exists
-require("dotenv").config();
+require('dotenv').config();
 
 // Define connection string and related Service Bus entity names here
 const connectionString = process.env.SERVICE_BUS_CONNECTION_STRING;
@@ -9,17 +9,19 @@ const topicName = process.env.TOPIC_NAME;
 
 const listOfScientists = [
   {
-    name: "Einstein",
-    firstName: "Albert"
+    name: 'Einstein',
+    firstName: 'Albert',
   },
   {
-    name: "Kopernikus",
-    firstName: "Nikolaus"
-  }
+    name: 'Kopernikus',
+    firstName: 'Nikolaus',
+  },
 ];
 
 async function main() {
-  const sbClient = ServiceBusClient.createFromConnectionString(connectionString);
+  const sbClient = ServiceBusClient.createFromConnectionString(
+    connectionString
+  );
 
   // If sending to a Topic, use `createTopicClient` instead of `createQueueClient`
   const topicClient = sbClient.createTopicClient(topicName);
@@ -30,7 +32,7 @@ async function main() {
       const scientist = listOfScientists[index];
       const message = {
         body: `${scientist.firstName} ${scientist.name}`,
-        label: "Scientist"
+        label: 'Scientist',
       };
 
       console.log(`Sending message: ${message.body} - ${message.label}`);
@@ -44,5 +46,5 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.log("Error occurred: ", err);
+  console.log('Error occurred: ', err);
 });
