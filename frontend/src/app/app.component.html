@@ -6,7 +6,7 @@
 <button (click)="restartServer()">Restart Server</button>
 <h2>Azure Service Bus Topic Messages</h2>
 <div *ngIf="!messages.length">Loading...</div>
-<ul *ngFor="let msg of messages">
-  <li>{{ msg }}</li>
+<ul *ngFor="let message of messages">
+  <li>{{ message }}</li>
 </ul>
 <!-- <router-outlet></router-outlet> -->
