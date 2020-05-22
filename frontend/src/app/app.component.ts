@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +24,8 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptions.unsubscribe();
   }
 
-  private getTopics() {
-    return this.http.get(this.apiUrl + '/peek');
-  }
+  private getTopics = (): Observable<any> =>
+    this.http.get(`${this.apiUrl}/peek`);
 
   private handleMessages = (msgs: any[] = []): void => {
     this.messages = msgs;
