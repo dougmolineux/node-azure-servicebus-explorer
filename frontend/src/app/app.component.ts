@@ -36,7 +36,7 @@ export class AppComponent implements OnDestroy, OnInit {
   private getTopics = (): Observable<any> =>
     this.http.get(`${this.apiUrl}/peek`);
 
-  private handleMessages = (msgs: any[] = []): void => {
-    this.messages = processMessages(msgs);
+  private handleMessages = (messages: any[] = []): void => {
+    this.messages = processMessages(messages);
   };
 }
