@@ -5,8 +5,8 @@
 <button>Update Service Bus Connection</button>
 <button>Restart Server</button>
 <h2>Azure Service Bus Topic Messages</h2>
-<div *ngIf="!messages">Loading...</div>
+<div *ngIf="!messages.length">Loading...</div>
 <ul *ngFor="let msg of messages">
-  <li>{{ msg[0].body }}</li>
+  <li>{{ msg }}</li>
 </ul>
 <!-- <router-outlet></router-outlet> -->

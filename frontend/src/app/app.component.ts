@@ -9,7 +9,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
-  public messages = null;
+  public messages: string[] = [];
 
   private subscriptions = new Subscription();
   private apiUrl = 'http://localhost:3000';
@@ -28,6 +28,6 @@ export class AppComponent implements OnDestroy, OnInit {
     this.http.get(`${this.apiUrl}/peek`);
 
   private handleMessages = (msgs: any[] = []): void => {
-    this.messages = msgs;
+    this.messages = msgs?.flatMap((x: any): string => x?.[0]?.body ?? []) ?? [];
   };
 }
