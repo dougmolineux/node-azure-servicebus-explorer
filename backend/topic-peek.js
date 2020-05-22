@@ -24,6 +24,8 @@ exports.peek = async() => {
       console.log(`Peeking message #${i}: ${messages[0].body}`);
     }
     await subClient.close();
+  } catch (e) {
+    console.error(e);
   } finally {
     await sbClient.close();
     return msgArr;
