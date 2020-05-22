@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'node-azure-servicebus-explorer-fe';
+  public title = 'node-azure-servicebus-explorer-fe';
 
-  messages = null;
+  public messages = null;
 
-  apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000';
 
-  getTopics() {
+  private getTopics() {
     return this.http.get(this.apiUrl + '/peek');
   }
 
