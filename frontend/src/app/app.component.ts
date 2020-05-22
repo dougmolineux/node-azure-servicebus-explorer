@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { processMessages } from './functions';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,6 @@ export class AppComponent implements OnDestroy, OnInit {
     this.http.get(`${this.apiUrl}/peek`);
 
   private handleMessages = (msgs: any[] = []): void => {
-    this.messages = msgs?.flatMap((x: any): string => x?.[0]?.body ?? []) ?? [];
+    this.messages = processMessages(msgs);
   };
 }
