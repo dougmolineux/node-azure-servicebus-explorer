@@ -1,6 +1,6 @@
 # node-azure-servicebus-explorer
 
-To install and start (tested on Mac node v12.16.1 and v13.12.0):
+To install and start (tested on Mac node v12.16.1 and v14.3.0):
 `npm run install-app && npm start`
 
 backend/topic-peek.js
