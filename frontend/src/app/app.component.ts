@@ -24,6 +24,14 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptions.unsubscribe();
   }
 
+  public updateConnection = (): void => {
+    console.log('updateConnection');
+  };
+
+  public restartServer = (): void => {
+    console.log('restartServer');
+  };
+
   private getTopics = (): Observable<any> =>
     this.http.get(`${this.apiUrl}/peek`);
 

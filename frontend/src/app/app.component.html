@@ -2,8 +2,8 @@
 <input type="text" placeholder="Connection String" />
 <input type="text" placeholder="Topic Name" />
 <input type="text" placeholder="Subscription Name" />
-<button>Update Service Bus Connection</button>
-<button>Restart Server</button>
+<button (click)="updateConnection()">Update Service Bus Connection</button>
+<button (click)="restartServer()">Restart Server</button>
 <h2>Azure Service Bus Topic Messages</h2>
 <div *ngIf="!messages.length">Loading...</div>
 <ul *ngFor="let msg of messages">
