@@ -1,7 +1,15 @@
 <h1>{{ title }}</h1>
-<input type="text" placeholder="Connection String" />
-<input type="text" placeholder="Topic Name" />
-<input type="text" placeholder="Subscription Name" />
+<input
+  type="text"
+  placeholder="Connection String"
+  [(ngModel)]="connectionString"
+/>
+<input type="text" placeholder="Topic Name" [(ngModel)]="topicName" />
+<input
+  type="text"
+  placeholder="Subscription Name"
+  [(ngModel)]="subscriptionName"
+/>
 <button (click)="updateConnection()">Update Service Bus Connection</button>
 <button (click)="restartServer()">Restart Server</button>
 <h2>Azure Service Bus Topic Messages</h2>

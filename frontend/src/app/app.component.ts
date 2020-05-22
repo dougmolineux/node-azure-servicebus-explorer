@@ -10,6 +10,9 @@ import { processMessages } from './functions';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
+  public connectionString = '';
+  public topicName = '';
+  public subscriptionName = '';
   public messages: string[] = [];
 
   private subscriptions = new Subscription();
@@ -26,7 +29,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public updateConnection = (): void => {
-    console.log('updateConnection');
+    this.postEnv().subscribe((res) => console.log('res', res));
   };
 
   public restartServer = (): void => {
@@ -35,6 +38,16 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private getTopics = (): Observable<any> =>
     this.http.get(`${this.apiUrl}/peek`);
+
+  private postEnv = (): Observable<any> => {
+    const {
+      connectionString: connString,
+      topicName: topic,
+      subscriptionName: sub,
+    } = this;
+    const body: any = { connString, topic, sub };
+    return this.http.post(`${this.apiUrl}/set-env`, body);
+  };
 
   private handleMessages = (messages: any[] = []): void => {
     this.messages = processMessages(messages);
