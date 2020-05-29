@@ -36,10 +36,6 @@ export class AppComponent implements OnDestroy, OnInit {
     );
   };
 
-  public restartServer = (): void => {
-    console.log('restartServer');
-  };
-
   private handleMessages = (messages: any[] = []): void => {
     this.messages = processMessages(messages);
   };
