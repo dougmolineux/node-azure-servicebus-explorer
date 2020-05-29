@@ -1,2 +1,2 @@
-export { api } from './api';
+export { API, getApi } from './api';
 export { PostRequestBody } from './postRequestBody';
