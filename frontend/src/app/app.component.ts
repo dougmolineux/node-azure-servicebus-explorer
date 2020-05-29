@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { processMessages } from './functions';
+import { api } from './structs';
+import { emptyPostRequestBody } from './structs/mocks';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +12,10 @@ import { processMessages } from './functions';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
-  public connectionString = '';
-  public topicName = '';
-  public subscriptionName = '';
+  public env = emptyPostRequestBody;
   public messages: string[] = [];
 
   private subscriptions = new Subscription();
-  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +28,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public updateConnection = (): void => {
-    this.postEnv().subscribe((res) => console.log('res', res));
+    this.subscriptions.add(this.postEnv().subscribe(this.handlePostResponse));
   };
 
   public restartServer = (): void => {
@@ -37,19 +36,16 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   private getTopics = (): Observable<any> =>
-    this.http.get(`${this.apiUrl}/peek`);
+    this.http.get(`${api.url}/${api.routes.GET}`);
 
-  private postEnv = (): Observable<any> => {
-    const {
-      connectionString: connString,
-      topicName: topic,
-      subscriptionName: sub,
-    } = this;
-    const body: any = { connString, topic, sub };
-    return this.http.post(`${this.apiUrl}/set-env`, body);
-  };
+  private postEnv = (): Observable<any> =>
+    this.http.post(`${api.url}/${api.routes.POST}`, this.env);
 
   private handleMessages = (messages: any[] = []): void => {
     this.messages = processMessages(messages);
+  };
+
+  private handlePostResponse = (res: any): void => {
+    console.log('POST response', res);
   };
 }
