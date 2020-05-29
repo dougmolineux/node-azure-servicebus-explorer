@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { processMessages } from './functions';
-import { API, getApi } from './structs';
+import { getApi, processMessages } from './functions';
+import { API } from './structs';
 import { emptyPostRequestBody } from './structs/mocks';
 
 @Component({
