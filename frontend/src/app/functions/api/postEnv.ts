@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { PostRequestBody } from '../../structs';
 import { ApiRoutes } from './apiRoutes';
+import { killServer } from './killServer';
 
 export const postEnv = ({
   http,
@@ -15,9 +16,4 @@ export const postEnv = ({
 }): Observable<any> =>
   http
     .post(`${url}/${ApiRoutes.setEnv}`, env)
-    .pipe(
-      flatMap(
-        (response: any): Observable<any> =>
-          http.post(`${url}/${ApiRoutes.kill}`, null)
-      )
-    );
+    .pipe(flatMap((response: any) => killServer({ http, url })));
