@@ -17,3 +17,15 @@ button {
   background-color: #1976d2;
   color: white;
 }
+
+li {
+  margin: 10px 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

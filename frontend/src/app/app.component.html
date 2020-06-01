@@ -10,7 +10,7 @@
 <h2>Azure Service Bus Topic Messages</h2>
 <div *ngIf="isLoadingMessages">Loading...</div>
 <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
-<ul *ngFor="let message of messages">
-  <li>{{ message }}</li>
-</ul>
+<ol>
+  <li *ngFor="let message of messages">{{ message }}</li>
+</ol>
 <!-- <router-outlet></router-outlet> -->
