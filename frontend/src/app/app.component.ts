@@ -13,6 +13,7 @@ import { emptyPostRequestBody } from './structs/mocks';
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
   public env = emptyPostRequestBody;
+  public isLoadingMessages = false;
   public messages: string[] = [];
 
   private subscriptions = new Subscription();
@@ -23,6 +24,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
+    this.isLoadingMessages = true;
     this.subscriptions.add(this.api.getTopics().subscribe(this.handleMessages));
   }
 
@@ -38,6 +40,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private handleMessages = (messages: any[] = []): void => {
     this.messages = processMessages(messages);
+    this.isLoadingMessages = false;
   };
 
   private handlePostResponse = (res: any): void => {
