@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { API, PostRequestBody } from '../structs';
+import { API, PostRequestBody } from '../../structs';
 
 const defaultUrl = 'http://localhost:3000';
 

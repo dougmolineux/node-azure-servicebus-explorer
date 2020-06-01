@@ -1,2 +1,2 @@
-export { getApi } from './getApi';
+export { getApi } from './api';
 export { processMessages } from './processMessages';
