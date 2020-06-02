@@ -19,9 +19,9 @@ export const retryWithLimitAndDelay = ({
   action?: string;
 }): Observable<any> => {
   const numRetry = index + 1;
-  if (numRetry <= numRetries) {
-    console.log(`${action} failed. Retry`, numRetry, 'of', numRetries);
-    return of(error).pipe(delay(msDelay));
+  if (numRetry > numRetries) {
+    return throwError(error);
   }
-  return throwError(error);
+  console.log(`${action} failed. Retry`, numRetry, 'of', numRetries);
+  return of(error).pipe(delay(msDelay));
 };
