@@ -45,6 +45,7 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   private fetchMessages = (): void => {
+    this.messages = [];
     this.isLoadingMessages = true;
     const subscription = this.subscriptions.add(
       this.api.getTopics().subscribe((messages): void => {
@@ -69,6 +70,6 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   private handlePostResponse = (response: any): void => {
-    console.log('POST response', response);
+    this.fetchMessages();
   };
 }
