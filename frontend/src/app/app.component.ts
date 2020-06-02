@@ -24,8 +24,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
-    this.isLoadingMessages = true;
-    this.subscriptions.add(this.api.getTopics().subscribe(this.handleMessages));
+    this.fetchMessages();
   }
 
   public ngOnDestroy(): void {
@@ -37,17 +36,39 @@ export class AppComponent implements OnDestroy, OnInit {
       alert('Connection info is incomplete or invalid.');
       return;
     }
-    this.subscriptions.add(
-      this.api.postEnv(this.env).subscribe(this.handlePostResponse)
+    this.submitEnv();
+  };
+
+  private unsubscribe = (subscription: Subscription): void => {
+    subscription.unsubscribe();
+    this.subscriptions.remove(subscription);
+  };
+
+  private fetchMessages = (): void => {
+    this.isLoadingMessages = true;
+    const subscription = this.subscriptions.add(
+      this.api.getTopics().subscribe((messages): void => {
+        this.handleMessages(messages);
+        this.unsubscribe(subscription);
+        this.isLoadingMessages = false;
+      })
     );
   };
 
   private handleMessages = (messages: any[] = []): void => {
     this.messages = processMessages(messages);
-    this.isLoadingMessages = false;
   };
 
-  private handlePostResponse = (res: any): void => {
-    console.log('POST response', res);
+  private submitEnv = (): void => {
+    const subscription = this.subscriptions.add(
+      this.api.postEnv(this.env).subscribe((response): void => {
+        this.handlePostResponse(response);
+        this.unsubscribe(subscription);
+      })
+    );
+  };
+
+  private handlePostResponse = (response: any): void => {
+    console.log('POST response', response);
   };
 }
