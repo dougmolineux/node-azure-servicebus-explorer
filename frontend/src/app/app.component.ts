@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { getApi, processMessages } from './functions';
+import { getApi, isEnvValid, processMessages } from './functions';
 import { API } from './structs';
 import { emptyPostRequestBody } from './structs/mocks';
 
@@ -33,6 +33,10 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public updateConnection = (): void => {
+    if (!isEnvValid(this.env)) {
+      alert('Connection info is incomplete or invalid.');
+      return;
+    }
     this.subscriptions.add(
       this.api.postEnv(this.env).subscribe(this.handlePostResponse)
     );
