@@ -31,8 +31,9 @@ SUBSCRIPTION_NAME=${envVars.sub}`;
   ctx.body = ctx.request.body;
 }
 
-async function kill() {
-  process.exit();
+async function kill(ctx) {
+  setTimeout(process.exit);
+  ctx.body = { status: 200 };
 }
 
 app
