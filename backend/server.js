@@ -9,10 +9,7 @@ const topicPeek = require('./topic-peek');
 const app = new Koa();
 const router = new Router();
 
-router
-  .get('/peek', peek)
-  .post('/set-env', setEnv)
-  .post('/kill', kill);
+router.get('/peek', peek).post('/set-env', setEnv).post('/kill', kill);
 
 async function peek(ctx) {
   ctx.body = await topicPeek.peek();
@@ -21,8 +18,7 @@ async function peek(ctx) {
 async function setEnv(ctx) {
   const envVars = ctx.request.body;
 
-  const data =
-`SERVICE_BUS_CONNECTION_STRING=${envVars.connString}
+  const data = `SERVICE_BUS_CONNECTION_STRING=${envVars.connString}
 TOPIC_NAME=${envVars.topic}
 SUBSCRIPTION_NAME=${envVars.sub}`;
 
