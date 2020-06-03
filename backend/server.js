@@ -2,9 +2,7 @@ const Koa = require('koa');
 const cors = require('@koa/cors');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const peek = require('./functions/peek');
-const setEnv = require('./functions/setEnv');
-const kill = require('./functions/kill');
+const { peek, setEnv, kill } = require('./functions');
 
 const app = new Koa();
 const router = new Router();
