@@ -1,11 +1,16 @@
-<input type="text" placeholder="Connection String" />
-<input type="text" placeholder="Topic Name" />
-<input type="text" placeholder="Subscription Name" />
-<button>Update Service Bus Connection</button>
-<button>Restart Server</button>
+<h1>{{ title }}</h1>
+<input
+  type="text"
+  placeholder="Connection String"
+  [(ngModel)]="env.connString"
+/>
+<input type="text" placeholder="Topic Name" [(ngModel)]="env.topic" />
+<input type="text" placeholder="Subscription Name" [(ngModel)]="env.sub" />
+<button (click)="updateConnection()">Update Service Bus Connection</button>
 <h2>Azure Service Bus Topic Messages</h2>
-<div *ngIf="!messages">Loading...</div>
-<ul *ngFor="let msg of messages">
-  <li>{{ msg[0].body }}</li>
-</ul>
+<div *ngIf="isLoadingMessages">Loading...</div>
+<div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
+<ol>
+  <li *ngFor="let message of messages">{{ message }}</li>
+</ol>
 <!-- <router-outlet></router-outlet> -->
