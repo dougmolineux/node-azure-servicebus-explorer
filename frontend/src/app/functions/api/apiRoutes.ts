@@ -1,5 +1,5 @@
 export enum ApiRoutes {
   peek = 'peek',
-  setEnv = 'set-env',
+  env = 'env',
   kill = 'kill',
 }

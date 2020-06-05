@@ -7,7 +7,7 @@ const { peek, setEnv: setConnection, kill } = require('./functions');
 const app = new Koa();
 const router = new Router();
 
-const routes = { peek: '/peek', env: '/set-env', kill: '/kill' };
+const routes = { peek: '/peek', env: '/env', kill: '/kill' };
 
 const getConnections = () => console.log('getConnections');
 const addConnection = () => console.log('addConnection');

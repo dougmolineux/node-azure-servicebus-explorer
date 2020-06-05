@@ -16,7 +16,7 @@ const handleError = (error: any): Observable<any> => {
 };
 
 export const postEnv = ({ http, url, env }: PostConfig): Observable<any> =>
-  http.post(`${url}/${ApiRoutes.setEnv}`, env).pipe(
+  http.post(`${url}/${ApiRoutes.env}`, env).pipe(
     catchError(handleError),
     flatMap((response: any) => killServer({ http, url }))
   );
