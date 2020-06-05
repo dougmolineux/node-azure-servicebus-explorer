@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { catchError, flatMap } from 'rxjs/operators';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { PostRequestBody } from '../../structs';
 import { ApiConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
@@ -18,5 +18,5 @@ const handleError = (error: any): Observable<any> => {
 export const postEnv = ({ http, url, env }: PostConfig): Observable<any> =>
   http.post(`${url}/${ApiRoutes.env}`, env).pipe(
     catchError(handleError),
-    flatMap((response: any) => killServer({ http, url }))
+    mergeMap((response: any) => killServer({ http, url }))
   );
