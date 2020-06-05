@@ -2,12 +2,26 @@ const Koa = require('koa');
 const cors = require('@koa/cors');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const { peek, setEnv, kill } = require('./functions');
+const { peek, setEnv: setConnection, kill } = require('./functions');
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/peek', peek).post('/set-env', setEnv).post('/kill', kill);
+const routes = { peek: '/peek', env: '/set-env', kill: '/kill' };
+
+const getConnections = () => console.log('getConnections');
+const addConnection = () => console.log('addConnection');
+const removeConnection = () => console.log('removeConnection');
+const editConnection = () => console.log('editConnection');
+
+router
+  .get(routes.peek, peek)
+  .get(routes.env, getConnections)
+  .post(routes.env, addConnection)
+  .put(routes.env, setConnection)
+  .delete(routes.env, removeConnection)
+  .patch(routes.env, editConnection)
+  .post(routes.kill, kill);
 
 app
   .use(cors())
