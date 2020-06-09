@@ -5,17 +5,26 @@ const {
 } = require('./constants');
 const parseConnection = require('./parseConnection');
 
-const getSavedConnections = async (ctx) => {
+const logError = (error) =>
+  console.log('Failed to get saved connections with error:', error);
+
+const getSavedConnections = async () => {
   try {
     const fileContents = await readFile(saved);
-    const connections = fileContents
-      .split(delimiter)
-      .map(parseConnection)
-      .filter(Boolean);
-    ctx.body = connections;
+    return fileContents.split(delimiter).map(parseConnection).filter(Boolean);
   } catch (error) {
-    console.log(error);
+    logError(error);
+    return [];
   }
 };
 
-module.exports = getSavedConnections;
+const httpGetSavedConnections = async (ctx) => {
+  try {
+    ctx.body = await getSavedConnections();
+  } catch (error) {
+    logError(error);
+    ctx.body = [];
+  }
+};
+
+module.exports = { getSavedConnections, httpGetSavedConnections };
