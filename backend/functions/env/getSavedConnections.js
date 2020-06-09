@@ -1,17 +1,16 @@
-const readFile = require('../readFile');
 const {
   files: { saved },
-  delimiters: { external: delimiter },
 } = require('./constants');
-const parseConnection = require('./parseConnection');
+const markActiveConnection = require('./markActiveConnection');
+const parseConnections = require('./parseConnections');
 
 const logError = (error) =>
   console.log('Failed to get saved connections with error:', error);
 
 const getSavedConnections = async () => {
   try {
-    const fileContents = await readFile(saved);
-    return fileContents.split(delimiter).map(parseConnection).filter(Boolean);
+    const connections = await parseConnections(saved);
+    return await markActiveConnection(connections);
   } catch (error) {
     logError(error);
     return [];
