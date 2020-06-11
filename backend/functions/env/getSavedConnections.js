@@ -2,14 +2,14 @@ const {
   files: { saved },
 } = require('./constants');
 const markActiveConnection = require('./markActiveConnection');
-const parseConnections = require('./parseConnections');
+const parseConnectionObjectsFromFile = require('./parseConnectionObjectsFromFile');
 
 const logError = (error) =>
   console.log('Failed to get saved connections with error:', error);
 
 const getSavedConnections = async () => {
   try {
-    const connections = await parseConnections(saved);
+    const connections = await parseConnectionObjectsFromFile(saved);
     return await markActiveConnection(connections);
   } catch (error) {
     logError(error);

@@ -4,7 +4,7 @@ const {
 } = require('./constants');
 const parseConnectionObjectFromString = require('./parseConnectionObjectFromString');
 
-const parseConnections = async (file) => {
+const parseConnectionObjectsFromFile = async (file) => {
   try {
     const fileContents = await readFile(file);
     return fileContents
@@ -12,9 +12,12 @@ const parseConnections = async (file) => {
       .map(parseConnectionObjectFromString)
       .filter(Boolean);
   } catch (error) {
-    console.log('Failed to parse connections with error:', error);
+    console.log(
+      'Failed to parse connection objects from file with error:',
+      error
+    );
     return [];
   }
 };
 
-module.exports = parseConnections;
+module.exports = parseConnectionObjectsFromFile;
