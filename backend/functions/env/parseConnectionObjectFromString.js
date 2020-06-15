@@ -12,8 +12,8 @@ const extractSuffix = (str = '', prefix = '') => {
 
 const logInvalid = (connection) => {
   console.log(
-    '\nInvalid saved connection' +
-      '\n------------------------' +
+    '\nInvalid connection string' +
+      '\n-------------------------' +
       `\n${connection}\n`
   );
   return null;

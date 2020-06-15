@@ -13,7 +13,9 @@ const respondSucceeded = (message = '') => ({ succeeded: true, message });
 
 const logInvalid = (connection) => {
   console.log(
-    '\nInvalid connection' + '\n------------------' + `\n${connection}\n`
+    '\nInvalid connection object' +
+      '\n-------------------------' +
+      `\n${JSON.stringify(connection)}\n`
   );
   return respondFailed('This connection is invalid.');
 };
@@ -42,6 +44,7 @@ const writeConnectionObjectToFile = async ({
     );
   } catch (error) {
     console.log('Failed to write connection object to file with error:', error);
+    return respondFailed('An unknown error occurred.');
   }
 };
 
