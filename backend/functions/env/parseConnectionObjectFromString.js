@@ -1,6 +1,6 @@
 const {
-  prefixes,
   delimiters: { internal: delimiter },
+  prefixes,
 } = require('./constants');
 
 const trim = (x) => x.trim();

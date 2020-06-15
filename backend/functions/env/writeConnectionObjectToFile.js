@@ -3,12 +3,9 @@ const findElementIndex = require('../findElementIndex');
 const {
   delimiters: { external: delimiter },
 } = require('./constants');
+const isValidConnectionObject = require('./isValidConnectionObject');
 const parseConnectionObjectsFromFile = require('./parseConnectionObjectsFromFile');
-
-const isValidConnection = (connection) => {
-  // Need to fill in.
-  return true;
-};
+const stringifyConnectionObject = require('./stringifyConnectionObject');
 
 const logInvalid = (connection) => {
   console.log(
@@ -17,17 +14,12 @@ const logInvalid = (connection) => {
   return { succeeded: false, message: 'This connection is invalid.' };
 };
 
-const stringifyConnectionObject = (connection) => {
-  // Need to fill in.
-  return '';
-};
-
 const writeConnectionObjectToFile = async ({
   connection,
   file,
   shouldOverwrite = false,
 }) => {
-  if (!isValidConnection(connection)) {
+  if (!isValidConnectionObject(connection)) {
     return logInvalid(connection);
   }
   try {
