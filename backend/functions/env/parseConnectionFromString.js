@@ -19,7 +19,7 @@ const logInvalid = (connection) => {
   return null;
 };
 
-const parseConnectionObjectFromString = (connection) => {
+const parseConnectionFromString = (connection) => {
   const parts = connection.split(delimiter).map(trim);
   const connString = extractSuffix(parts[0], prefixes.connString);
   const topic = extractSuffix(parts[1], prefixes.topic);
@@ -29,4 +29,4 @@ const parseConnectionObjectFromString = (connection) => {
     : logInvalid(connection);
 };
 
-module.exports = parseConnectionObjectFromString;
+module.exports = parseConnectionFromString;

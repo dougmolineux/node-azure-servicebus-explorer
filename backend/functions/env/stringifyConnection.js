@@ -3,9 +3,9 @@ const {
   prefixes,
 } = require('./constants');
 
-const stringifyConnectionObject = (connection) =>
+const stringifyConnection = (connection) =>
   `${prefixes.connString}${connection.connString}${delimiter}` +
   `${prefixes.topic}${connection.topic}${delimiter}` +
   `${prefixes.sub}${connection.sub}`;
 
-module.exports = stringifyConnectionObject;
+module.exports = stringifyConnection;

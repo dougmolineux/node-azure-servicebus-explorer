@@ -2,11 +2,11 @@ const isShallowMatch = require('../isShallowMatch');
 const {
   files: { env },
 } = require('./constants');
-const parseConnectionObjectsFromFile = require('./parseConnectionObjectsFromFile');
+const parseConnectionsFromFile = require('./parseConnectionsFromFile');
 
 const markActiveConnection = async (connections) => {
   try {
-    const envConnections = await parseConnectionObjectsFromFile(env);
+    const envConnections = await parseConnectionsFromFile(env);
     const activeConnection = envConnections[0];
     return connections.map((x) => ({
       ...x,

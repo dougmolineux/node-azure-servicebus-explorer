@@ -3,27 +3,24 @@ const readFile = require('../readFile');
 const {
   delimiters: { external: delimiter },
 } = require('./constants');
-const parseConnectionObjectFromString = require('./parseConnectionObjectFromString');
+const parseConnectionFromString = require('./parseConnectionFromString');
 
 const processFileContents = (fileContents = '') =>
   isPopulated(fileContents)
     ? fileContents
         .split(delimiter)
-        .map(parseConnectionObjectFromString)
+        .map(parseConnectionFromString)
         .filter(Boolean)
     : [];
 
-const parseConnectionObjectsFromFile = async (file) => {
+const parseConnectionsFromFile = async (file) => {
   try {
     const fileContents = await readFile(file);
     return processFileContents(fileContents);
   } catch (error) {
-    console.log(
-      'Failed to parse connection objects from file with error:',
-      error
-    );
+    console.log('Failed to parse connections from file with error:', error);
     return [];
   }
 };
 
-module.exports = parseConnectionObjectsFromFile;
+module.exports = parseConnectionsFromFile;

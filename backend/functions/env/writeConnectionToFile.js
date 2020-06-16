@@ -3,9 +3,9 @@ const findElementIndex = require('../findElementIndex');
 const {
   delimiters: { external: delimiter },
 } = require('./constants');
-const isValidConnectionObject = require('./isValidConnectionObject');
-const parseConnectionObjectsFromFile = require('./parseConnectionObjectsFromFile');
-const stringifyConnectionObject = require('./stringifyConnectionObject');
+const isValidConnection = require('./isValidConnection');
+const parseConnectionsFromFile = require('./parseConnectionsFromFile');
+const stringifyConnection = require('./stringifyConnection');
 
 const respondFailed = (message) => ({ succeeded: false, message });
 
@@ -20,32 +20,32 @@ const logInvalid = (connection) => {
   return respondFailed('This connection is invalid.');
 };
 
-const writeConnectionObjectToFile = async ({
+const writeConnectionToFile = async ({
   connection,
   file,
   shouldOverwrite = false,
 }) => {
-  if (!isValidConnectionObject(connection)) {
+  if (!isValidConnection(connection)) {
     return logInvalid(connection);
   }
   try {
     const connections = shouldOverwrite
       ? []
-      : await parseConnectionObjectsFromFile(file);
+      : await parseConnectionsFromFile(file);
     if (findElementIndex(connections, connection) > -1) {
       return respondFailed('This connection already exists.');
     }
     const connectionsAsString = [...connections, connection]
-      .map(stringifyConnectionObject)
+      .map(stringifyConnection)
       .join(delimiter);
     await fs.writeFile(file, connectionsAsString);
     return respondSucceeded(
       shouldOverwrite ? 'Overwrote file.' : 'Added to file.'
     );
   } catch (error) {
-    console.log('Failed to write connection object to file with error:', error);
+    console.log('Failed to write connection to file with error:', error);
     return respondFailed('An unknown error occurred.');
   }
 };
 
-module.exports = writeConnectionObjectToFile;
+module.exports = writeConnectionToFile;
