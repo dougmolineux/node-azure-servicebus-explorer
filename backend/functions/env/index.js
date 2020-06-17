@@ -4,5 +4,12 @@ const {
 const {
   httpGetSavedConnections: getSavedConnections,
 } = require('./getSavedConnections');
+const {
+  httpSetEnvToConnection: setEnvToConnection,
+} = require('./setEnvToConnection');
 
-module.exports = { addSavedConnection, getSavedConnections };
+module.exports = {
+  addSavedConnection,
+  getSavedConnections,
+  setEnvToConnection,
+};

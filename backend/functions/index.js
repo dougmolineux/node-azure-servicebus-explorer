@@ -6,5 +6,4 @@ module.exports = {
   isShallowMatch: require('./isShallowMatch'),
   kill: require('./kill'),
   peek: require('./peek'),
-  setEnv: require('./setEnv'),
 };

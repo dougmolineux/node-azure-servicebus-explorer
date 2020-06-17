@@ -4,10 +4,10 @@ const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const {
   addSavedConnection,
-  peek,
   getSavedConnections,
-  setEnv: setConnection,
   kill,
+  peek,
+  setEnvToConnection,
 } = require('./functions');
 
 const app = new Koa();
@@ -22,7 +22,7 @@ router
   .get(routes.peek, peek)
   .get(routes.env, getSavedConnections)
   .post(routes.env, addSavedConnection)
-  .put(routes.env, setConnection)
+  .put(routes.env, setEnvToConnection)
   .delete(routes.env, removeConnection)
   .patch(routes.env, editConnection)
   .post(routes.kill, kill);
