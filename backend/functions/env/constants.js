@@ -14,4 +14,8 @@ const delimiters = {
   external: `\n\n`,
 };
 
-module.exports = { files, prefixes, delimiters };
+const messages = {
+  unknownError: 'An unknown error occurred.',
+};
+
+module.exports = { files, prefixes, delimiters, messages };

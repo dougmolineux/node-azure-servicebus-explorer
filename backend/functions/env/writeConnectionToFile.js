@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const findElementIndex = require('../findElementIndex');
 const {
   delimiters: { external: delimiter },
+  messages: { unknownError },
 } = require('./constants');
 const isValidConnection = require('./isValidConnection');
 const parseConnectionsFromFile = require('./parseConnectionsFromFile');
@@ -44,8 +45,8 @@ const writeConnectionToFile = async ({
     );
   } catch (error) {
     console.log('Failed to write connection to file with error:', error);
-    return respondFailed('An unknown error occurred.');
+    return respondFailed(unknownError);
   }
 };
 
-module.exports = writeConnectionToFile;
+module.exports = { respondFailed, writeConnectionToFile };
