@@ -3,6 +3,7 @@ const cors = require('@koa/cors');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const {
+  addSavedConnection,
   peek,
   getSavedConnections,
   setEnv: setConnection,
@@ -14,14 +15,13 @@ const router = new Router();
 
 const routes = { peek: '/peek', env: '/env', kill: '/kill' };
 
-const addConnection = () => console.log('addConnection');
 const removeConnection = () => console.log('removeConnection');
 const editConnection = () => console.log('editConnection');
 
 router
   .get(routes.peek, peek)
   .get(routes.env, getSavedConnections)
-  .post(routes.env, addConnection)
+  .post(routes.env, addSavedConnection)
   .put(routes.env, setConnection)
   .delete(routes.env, removeConnection)
   .patch(routes.env, editConnection)

@@ -1,7 +1,8 @@
 const {
+  httpAddSavedConnection: addSavedConnection,
+} = require('./addSavedConnection');
+const {
   httpGetSavedConnections: getSavedConnections,
 } = require('./getSavedConnections');
 
-module.exports = {
-  getSavedConnections,
-};
+module.exports = { addSavedConnection, getSavedConnections };
