@@ -7,6 +7,7 @@ const {
   getSavedConnections,
   kill,
   peek,
+  removeSavedConnection,
   setEnvToConnection,
 } = require('./functions');
 
@@ -15,7 +16,6 @@ const router = new Router();
 
 const routes = { peek: '/peek', env: '/env', kill: '/kill' };
 
-const removeConnection = () => console.log('removeConnection');
 const editConnection = () => console.log('editConnection');
 
 router
@@ -23,7 +23,7 @@ router
   .get(routes.env, getSavedConnections)
   .post(routes.env, addSavedConnection)
   .put(routes.env, setEnvToConnection)
-  .delete(routes.env, removeConnection)
+  .delete(routes.env, removeSavedConnection)
   .patch(routes.env, editConnection)
   .post(routes.kill, kill);
 

@@ -48,4 +48,4 @@ const writeConnectionToFile = async ({
   }
 };
 
-module.exports = { respondFailed, writeConnectionToFile };
+module.exports = { respondFailed, respondSucceeded, writeConnectionToFile };

@@ -16,6 +16,7 @@ const delimiters = {
 
 const messages = {
   unknownError: 'An unknown error occurred.',
+  connectionNotFound: 'Could not find this connection in saved connections.',
 };
 
 module.exports = { files, prefixes, delimiters, messages };
