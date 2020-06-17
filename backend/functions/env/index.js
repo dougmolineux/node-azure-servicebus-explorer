@@ -2,6 +2,9 @@ const {
   httpAddSavedConnection: addSavedConnection,
 } = require('./addSavedConnection');
 const {
+  httpEditSavedConnection: editSavedConnection,
+} = require('./editSavedConnection');
+const {
   httpGetSavedConnections: getSavedConnections,
 } = require('./getSavedConnections');
 const {
@@ -13,6 +16,7 @@ const {
 
 module.exports = {
   addSavedConnection,
+  editSavedConnection,
   getSavedConnections,
   removeSavedConnection,
   setEnvToConnection,

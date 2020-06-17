@@ -4,6 +4,7 @@ const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const {
   addSavedConnection,
+  editSavedConnection,
   getSavedConnections,
   kill,
   peek,
@@ -16,15 +17,13 @@ const router = new Router();
 
 const routes = { peek: '/peek', env: '/env', kill: '/kill' };
 
-const editConnection = () => console.log('editConnection');
-
 router
   .get(routes.peek, peek)
   .get(routes.env, getSavedConnections)
   .post(routes.env, addSavedConnection)
   .put(routes.env, setEnvToConnection)
   .delete(routes.env, removeSavedConnection)
-  .patch(routes.env, editConnection)
+  .patch(routes.env, editSavedConnection)
   .post(routes.kill, kill);
 
 app
