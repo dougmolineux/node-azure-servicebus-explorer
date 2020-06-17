@@ -1,12 +1,11 @@
 const fs = require('fs').promises;
 const findElementIndex = require('../findElementIndex');
 const {
-  delimiters: { external: delimiter },
   messages: { unknownError },
 } = require('./constants');
 const isValidConnection = require('./isValidConnection');
 const parseConnectionsFromFile = require('./parseConnectionsFromFile');
-const stringifyConnection = require('./stringifyConnection');
+const stringifyConnections = require('./stringifyConnections');
 
 const respondFailed = (message) => ({ succeeded: false, message });
 
@@ -36,10 +35,10 @@ const writeConnectionToFile = async ({
     if (findElementIndex(connections, connection) > -1) {
       return respondFailed('This connection already exists.');
     }
-    const connectionsAsString = [...connections, connection]
-      .map(stringifyConnection)
-      .join(delimiter);
-    await fs.writeFile(file, connectionsAsString);
+    await fs.writeFile(
+      file,
+      stringifyConnections([...connections, connection])
+    );
     return respondSucceeded(
       shouldOverwrite ? 'Overwrote file.' : 'Added to file.'
     );
