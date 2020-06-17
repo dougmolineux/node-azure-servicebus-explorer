@@ -1,5 +1,7 @@
 const topicPeek = require('../topic-peek');
 
-module.exports = async function peek(ctx) {
+const peek = async (ctx) => {
   ctx.body = await topicPeek.peek();
 };
+
+module.exports = peek;
