@@ -1,3 +1,3 @@
 export { getApi } from './api';
-export { isEnvValid } from './isEnvValid';
+export { isConnectionValid } from './isConnectionValid';
 export { processMessages } from './processMessages';
