@@ -1,13 +1,13 @@
 import { Observable, of } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
-import { PostRequestBody } from '../../structs';
+import { Connection } from '../../structs';
 import { ApiConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
 import { killServer } from './killServer';
 import { noteError } from './noteError';
 
 interface PostConfig extends ApiConfig {
-  env: PostRequestBody;
+  env: Connection;
 }
 
 const handleError = (error: any): Observable<any> => {

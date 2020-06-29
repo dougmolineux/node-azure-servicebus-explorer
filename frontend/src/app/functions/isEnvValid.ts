@@ -1,4 +1,4 @@
-import { PostRequestBody } from '../structs';
+import { Connection } from '../structs';
 
-export const isEnvValid = (env: PostRequestBody): boolean =>
+export const isEnvValid = (env: Connection): boolean =>
   Object.values(env).every(Boolean);

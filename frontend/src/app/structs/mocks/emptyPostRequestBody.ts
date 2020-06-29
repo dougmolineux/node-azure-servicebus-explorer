@@ -1,6 +1,6 @@
-import { PostRequestBody } from '../postRequestBody';
+import { Connection } from '../connection';
 
-export const emptyPostRequestBody: PostRequestBody = {
+export const emptyPostRequestBody: Connection = {
   connString: '',
   topic: '',
   sub: '',
