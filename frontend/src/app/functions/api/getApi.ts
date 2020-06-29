@@ -9,5 +9,5 @@ const defaultUrl = 'http://localhost:3000';
 export const getApi = (http: HttpClient, url = defaultUrl): API => ({
   getSavedConnections: () => getSavedConnections({ http, url }),
   getTopics: () => getTopics({ http, url }),
-  postEnv: (env: Connection) => postEnv({ http, url, env }),
+  postEnv: (connection: Connection) => postEnv({ http, url, env: connection }),
 });

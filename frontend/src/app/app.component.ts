@@ -12,7 +12,7 @@ import { emptyConnection } from './structs/mocks';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
-  public env = emptyConnection;
+  public connection = emptyConnection;
   public isLoadingSavedConnections = false;
   public savedConnections: Connection[] = [];
   public isLoadingMessages = false;
@@ -35,7 +35,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public updateConnection = (): void => {
-    if (!isEnvValid(this.env)) {
+    if (!isEnvValid(this.connection)) {
       alert('Connection info is incomplete or invalid.');
       return;
     }
@@ -83,7 +83,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private submitEnv = (): void => {
     const subscription = this.subscriptions.add(
-      this.api.postEnv(this.env).subscribe((response): void => {
+      this.api.postEnv(this.connection).subscribe((response): void => {
         this.handlePostResponse(response);
         this.unsubscribe(subscription);
       })

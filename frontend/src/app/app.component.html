@@ -14,10 +14,14 @@
 <input
   type="text"
   placeholder="Connection String"
-  [(ngModel)]="env.connString"
+  [(ngModel)]="connection.connString"
 />
-<input type="text" placeholder="Topic Name" [(ngModel)]="env.topic" />
-<input type="text" placeholder="Subscription Name" [(ngModel)]="env.sub" />
+<input type="text" placeholder="Topic Name" [(ngModel)]="connection.topic" />
+<input
+  type="text"
+  placeholder="Subscription Name"
+  [(ngModel)]="connection.sub"
+/>
 <button (click)="updateConnection()">Update Service Bus Connection</button>
 <h2>Azure Service Bus Topic Messages</h2>
 <div *ngIf="isLoadingMessages">Loading...</div>
