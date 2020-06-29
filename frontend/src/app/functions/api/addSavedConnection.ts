@@ -6,11 +6,11 @@ import { killServer } from './killServer';
 import { noteError } from './noteError';
 
 const handleError = (error: any): Observable<any> => {
-  noteError('update environment', error);
+  noteError('add saved connection', error);
   return of();
 };
 
-export const postEnv = ({
+export const addSavedConnection = ({
   http,
   url,
   connection,

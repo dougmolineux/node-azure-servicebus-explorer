@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { API, Connection } from '../../structs';
+import { addSavedConnection } from './addSavedConnection';
 import { getSavedConnections } from './getSavedConnections';
 import { getTopics } from './getTopics';
-import { postEnv as addSavedConnection } from './postEnv';
 
 const defaultUrl = 'http://localhost:3000';
 
