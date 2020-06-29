@@ -83,10 +83,12 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private submitEnv = (): void => {
     const subscription = this.subscriptions.add(
-      this.api.postEnv(this.connection).subscribe((response): void => {
-        this.handlePostResponse(response);
-        this.unsubscribe(subscription);
-      })
+      this.api
+        .addSavedConnection(this.connection)
+        .subscribe((response): void => {
+          this.handlePostResponse(response);
+          this.unsubscribe(subscription);
+        })
     );
   };
 
