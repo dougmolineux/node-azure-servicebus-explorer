@@ -1,1 +1,1 @@
-export { emptyPostRequestBody } from './emptyPostRequestBody';
+export { emptyConnection } from './emptyConnection';

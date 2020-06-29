@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { getApi, isEnvValid, processMessages } from './functions';
 import { API, Connection } from './structs';
-import { emptyPostRequestBody } from './structs/mocks';
+import { emptyConnection } from './structs/mocks';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ import { emptyPostRequestBody } from './structs/mocks';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
-  public env = emptyPostRequestBody;
+  public env = emptyConnection;
   public isLoadingSavedConnections = false;
   public savedConnections: Connection[] = [];
   public isLoadingMessages = false;
