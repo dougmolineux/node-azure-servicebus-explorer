@@ -22,7 +22,7 @@
   placeholder="Subscription Name"
   [(ngModel)]="connection.sub"
 />
-<button (click)="updateConnection()">Update Service Bus Connection</button>
+<button (click)="addSavedConnection()">Add Service Bus Connection</button>
 <h2>Azure Service Bus Topic Messages</h2>
 <div *ngIf="isLoadingMessages">Loading...</div>
 <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>

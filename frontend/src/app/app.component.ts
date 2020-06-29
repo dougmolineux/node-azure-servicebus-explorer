@@ -26,20 +26,27 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit(): void {
-    this.fetchSavedConnections();
-    this.fetchMessages();
+    this.getSavedConnections();
+    this.getMessages();
   }
 
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  public updateConnection = (): void => {
+  public addSavedConnection = (): void => {
     if (!isConnectionValid(this.connection)) {
       alert('Connection info is incomplete or invalid.');
       return;
     }
-    this.submitEnv();
+    const subscription = this.subscriptions.add(
+      this.api
+        .addSavedConnection(this.connection)
+        .subscribe((response): void => {
+          this.handleAddSavedConnectionResponse(response);
+          this.unsubscribe(subscription);
+        })
+    );
   };
 
   private unsubscribe = (subscription: Subscription): void => {
@@ -47,7 +54,7 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptions.remove(subscription);
   };
 
-  private fetchSavedConnections = (): void => {
+  private getSavedConnections = (): void => {
     this.savedConnections = [];
     this.isLoadingSavedConnections = true;
     const subscription = this.subscriptions.add(
@@ -65,7 +72,7 @@ export class AppComponent implements OnDestroy, OnInit {
     this.savedConnections = savedConnections;
   };
 
-  private fetchMessages = (): void => {
+  private getMessages = (): void => {
     this.messages = [];
     this.isLoadingMessages = true;
     const subscription = this.subscriptions.add(
@@ -81,18 +88,7 @@ export class AppComponent implements OnDestroy, OnInit {
     this.messages = processMessages(messages);
   };
 
-  private submitEnv = (): void => {
-    const subscription = this.subscriptions.add(
-      this.api
-        .addSavedConnection(this.connection)
-        .subscribe((response): void => {
-          this.handlePostResponse(response);
-          this.unsubscribe(subscription);
-        })
-    );
-  };
-
-  private handlePostResponse = (response: any): void => {
-    this.fetchMessages();
+  private handleAddSavedConnectionResponse = (response: any): void => {
+    this.getMessages();
   };
 }
