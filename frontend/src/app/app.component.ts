@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { getApi, isConnectionValid, processMessages } from './functions';
-import { API, Connection } from './structs';
-import { emptyConnection } from './structs/mocks';
+import {
+  getApi,
+  isConnectionValid,
+  isPopulated,
+  processMessages,
+} from './functions';
+import { API, ApiResponse, Connection } from './structs';
+import { emptyApiResponse, emptyConnection } from './structs/mocks';
 
 @Component({
   selector: 'app-root',
@@ -55,13 +60,12 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   private getSavedConnections = (): void => {
-    this.savedConnections = [];
     this.isLoadingSavedConnections = true;
     const subscription = this.subscriptions.add(
       this.api.getSavedConnections().subscribe((savedConnections): void => {
+        this.isLoadingSavedConnections = false;
         this.handleSavedConnections(savedConnections);
         this.unsubscribe(subscription);
-        this.isLoadingSavedConnections = false;
       })
     );
   };
@@ -88,7 +92,14 @@ export class AppComponent implements OnDestroy, OnInit {
     this.messages = processMessages(messages);
   };
 
-  private handleAddSavedConnectionResponse = (response: any): void => {
-    this.getMessages();
+  private handleAddSavedConnectionResponse = (
+    response: ApiResponse = emptyApiResponse
+  ): void => {
+    const { succeeded, message } = response;
+    if (!succeeded) {
+      alert(isPopulated(message) ? message : 'Operation failed.');
+      return;
+    }
+    this.getSavedConnections();
   };
 }

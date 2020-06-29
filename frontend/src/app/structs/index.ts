@@ -1,2 +1,2 @@
-export { API } from './api';
+export { API, ApiResponse } from './api';
 export { Connection } from './connection';

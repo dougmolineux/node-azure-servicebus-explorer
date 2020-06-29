@@ -1,7 +1,9 @@
 <h1>{{ title }}</h1>
 <div class="saved-connections">
   <h2>Saved Connections</h2>
-  <div *ngIf="isLoadingSavedConnections">Loading...</div>
+  <div *ngIf="!isLoadingSavedConnections && !savedConnections.length">
+    No saved connections.
+  </div>
   <ul>
     <li *ngFor="let connection of savedConnections">
       {{ connection.topic }} - {{ connection.sub }}
@@ -10,6 +12,7 @@
       >
     </li>
   </ul>
+  <div *ngIf="isLoadingSavedConnections">Loading...</div>
 </div>
 <input
   type="text"

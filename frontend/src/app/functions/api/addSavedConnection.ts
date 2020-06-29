@@ -1,8 +1,8 @@
 import { Observable, of } from 'rxjs';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { ApiResponse } from '../../structs';
 import { ApiConnectionConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
-import { killServer } from './killServer';
 import { noteError } from './noteError';
 
 const handleError = (error: any): Observable<any> => {
@@ -14,8 +14,7 @@ export const addSavedConnection = ({
   http,
   url,
   connection,
-}: ApiConnectionConfig): Observable<any> =>
-  http.post(`${url}/${ApiRoutes.env}`, connection).pipe(
-    catchError(handleError),
-    mergeMap((response: any) => killServer({ http, url }))
-  );
+}: ApiConnectionConfig): Observable<ApiResponse> =>
+  http
+    .post(`${url}/${ApiRoutes.env}`, connection)
+    .pipe(catchError(handleError));
