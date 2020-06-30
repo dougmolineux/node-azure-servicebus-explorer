@@ -11,9 +11,7 @@
       (click)="selectConnection(connection)"
     >
       {{ connection.topic }} - {{ connection.sub }}
-      <span *ngIf="connection.isActive" style="font-weight: bold;">
-        [Active]</span
-      >
+      <span *ngIf="connection.isActive">[Active]</span>
     </li>
   </ul>
   <div *ngIf="isLoadingSavedConnections">Loading...</div>
