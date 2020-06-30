@@ -9,7 +9,7 @@ export interface ApiResponse {
 export interface API {
   addSavedConnection: (connection: Connection) => Observable<ApiResponse>;
   getSavedConnections: () => Observable<Connection[]>;
-  getTopics: () => Observable<any>;
+  getTopics: () => Observable<any[]>;
   killServer: () => Observable<ApiResponse>;
   selectConnection: (connection: Connection) => Observable<ApiResponse>;
 }
