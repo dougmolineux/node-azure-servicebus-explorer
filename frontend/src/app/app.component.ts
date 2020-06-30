@@ -72,13 +72,16 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptions.remove(subscription);
   };
 
-  private getSavedConnections = (): void => {
+  private getSavedConnections = (shouldKillServer = false): void => {
     this.isLoadingSavedConnections = true;
     const subscription = this.subscriptions.add(
       this.api.getSavedConnections().subscribe((savedConnections): void => {
         this.isLoadingSavedConnections = false;
         this.handleSavedConnections(savedConnections);
         this.unsubscribe(subscription);
+        if (shouldKillServer) {
+          this.killServer();
+        }
       })
     );
   };
@@ -124,6 +127,25 @@ export class AppComponent implements OnDestroy, OnInit {
       alert(isPopulated(message) ? message : failureMessage);
       return;
     }
-    this.getSavedConnections();
+    this.getSavedConnections(true);
+  };
+
+  private killServer = (): void => {
+    const subscription = this.subscriptions.add(
+      this.api.killServer().subscribe((response): void => {
+        this.handleKillServerResponse(response);
+        this.unsubscribe(subscription);
+      })
+    );
+  };
+
+  private handleKillServerResponse = (
+    response: ApiResponse = emptyApiResponse
+  ): void => {
+    const { succeeded, message } = response;
+    if (!succeeded) {
+      alert(isPopulated(message) ? message : failureMessage);
+      return;
+    }
   };
 }
