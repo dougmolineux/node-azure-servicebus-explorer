@@ -32,7 +32,6 @@ export class AppComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.getSavedConnections();
-    this.getMessages();
   }
 
   public ngOnDestroy(): void {
@@ -51,6 +50,18 @@ export class AppComponent implements OnDestroy, OnInit {
           this.handleAddSavedConnectionResponse(response);
           this.unsubscribe(subscription);
         })
+    );
+  };
+
+  public selectConnection = (connection: Connection): void => {
+    if (connection.isActive) {
+      return;
+    }
+    const subscription = this.subscriptions.add(
+      this.api.selectConnection(connection).subscribe((response): void => {
+        this.handleSelectConnectionResponse(response);
+        this.unsubscribe(subscription);
+      })
     );
   };
 
@@ -101,5 +112,15 @@ export class AppComponent implements OnDestroy, OnInit {
       return;
     }
     this.getSavedConnections();
+  };
+
+  private handleSelectConnectionResponse = (
+    response: ApiResponse = emptyApiResponse
+  ): void => {
+    const { succeeded, message } = response;
+    if (!succeeded) {
+      alert(isPopulated(message) ? message : 'Operation failed.');
+      return;
+    }
   };
 }

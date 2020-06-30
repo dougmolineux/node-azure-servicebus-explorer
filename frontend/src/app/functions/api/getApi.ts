@@ -3,6 +3,7 @@ import { API, Connection } from '../../structs';
 import { addSavedConnection } from './addSavedConnection';
 import { getSavedConnections } from './getSavedConnections';
 import { getTopics } from './getTopics';
+import { selectConnection } from './selectConnection';
 
 const defaultUrl = 'http://localhost:3000';
 
@@ -11,4 +12,6 @@ export const getApi = (http: HttpClient, url = defaultUrl): API => ({
     addSavedConnection({ http, url, connection }),
   getSavedConnections: () => getSavedConnections({ http, url }),
   getTopics: () => getTopics({ http, url }),
+  selectConnection: (connection: Connection) =>
+    selectConnection({ http, url, connection }),
 });

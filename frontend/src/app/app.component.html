@@ -5,7 +5,11 @@
     No saved connections.
   </div>
   <ul>
-    <li *ngFor="let connection of savedConnections">
+    <li
+      *ngFor="let connection of savedConnections"
+      [ngClass]="{ 'is-active': connection.isActive }"
+      (click)="selectConnection(connection)"
+    >
       {{ connection.topic }} - {{ connection.sub }}
       <span *ngIf="connection.isActive" style="font-weight: bold;">
         [Active]</span

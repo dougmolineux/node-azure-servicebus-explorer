@@ -34,3 +34,13 @@ li {
     margin-bottom: 0;
   }
 }
+
+.saved-connections {
+  li:not(.is-active) {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
