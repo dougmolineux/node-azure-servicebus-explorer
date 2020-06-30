@@ -124,5 +124,6 @@ export class AppComponent implements OnDestroy, OnInit {
       alert(isPopulated(message) ? message : failureMessage);
       return;
     }
+    this.getSavedConnections();
   };
 }

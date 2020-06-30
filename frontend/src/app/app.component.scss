@@ -13,6 +13,10 @@ h2 {
   margin: 8px 0;
 }
 
+ul {
+  margin-top: 0;
+}
+
 input {
   width: 100%;
   margin-bottom: 5px;
@@ -36,6 +40,15 @@ li {
 }
 
 .saved-connections {
+  h2,
+  .loading {
+    display: inline-block;
+  }
+
+  .loading {
+    margin-left: 10px;
+  }
+
   li {
     &:not(.is-active) {
       cursor: pointer;
