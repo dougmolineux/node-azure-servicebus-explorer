@@ -15,23 +15,29 @@
       <span *ngIf="connection.isActive">[Active]</span>
     </li>
   </ul>
+  <div *ngIf="isLoadingMessages" class="mask"></div>
 </div>
-<input
-  type="text"
-  placeholder="Connection String"
-  [(ngModel)]="connection.connString"
-/>
-<input type="text" placeholder="Topic Name" [(ngModel)]="connection.topic" />
-<input
-  type="text"
-  placeholder="Subscription Name"
-  [(ngModel)]="connection.sub"
-/>
-<button (click)="addSavedConnection()">Add Service Bus Connection</button>
-<h2>Azure Service Bus Topic Messages</h2>
-<div *ngIf="isLoadingMessages">Loading...</div>
-<div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
-<ol>
-  <li *ngFor="let message of messages">{{ message }}</li>
-</ol>
+<div class="add-saved-connection">
+  <input
+    type="text"
+    placeholder="Connection String"
+    [(ngModel)]="connection.connString"
+  />
+  <input type="text" placeholder="Topic Name" [(ngModel)]="connection.topic" />
+  <input
+    type="text"
+    placeholder="Subscription Name"
+    [(ngModel)]="connection.sub"
+  />
+  <button (click)="addSavedConnection()">Add Service Bus Connection</button>
+  <div *ngIf="isLoadingMessages" class="mask"></div>
+</div>
+<div class="messages">
+  <h2>Azure Service Bus Topic Messages</h2>
+  <div *ngIf="isLoadingMessages">Loading...</div>
+  <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
+  <ol>
+    <li *ngFor="let message of messages">{{ message }}</li>
+  </ol>
+</div>
 <!-- <router-outlet></router-outlet> -->
