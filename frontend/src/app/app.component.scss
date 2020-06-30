@@ -33,18 +33,20 @@ li {
   &:last-child {
     margin-bottom: 0;
   }
-
-  span {
-    font-weight: bold;
-  }
 }
 
 .saved-connections {
-  li:not(.is-active) {
-    cursor: pointer;
+  li {
+    &:not(.is-active) {
+      cursor: pointer;
 
-    &:hover {
-      text-decoration: underline;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    span {
+      font-weight: bold;
     }
   }
 }
