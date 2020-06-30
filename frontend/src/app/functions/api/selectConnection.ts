@@ -5,9 +5,9 @@ import { ApiConnectionConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
 import { noteError } from './noteError';
 
-const handleError = (error: any): Observable<any> => {
-  noteError('select connection', error);
-  return of();
+const handleError = (error: any): Observable<ApiResponse> => {
+  const message = noteError({ action: 'select connection', error });
+  return of({ succeeded: false, message });
 };
 
 export const selectConnection = ({
@@ -15,4 +15,6 @@ export const selectConnection = ({
   url,
   connection,
 }: ApiConnectionConfig): Observable<ApiResponse> =>
-  http.put(`${url}/${ApiRoutes.env}`, connection).pipe(catchError(handleError));
+  http
+    .put<ApiResponse>(`${url}/${ApiRoutes.env}`, connection)
+    .pipe(catchError(handleError));

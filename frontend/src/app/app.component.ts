@@ -10,6 +10,8 @@ import {
 import { API, ApiResponse, Connection } from './structs';
 import { emptyApiResponse, emptyConnection } from './structs/mocks';
 
+const failureMessage = 'Operation failed.';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -108,7 +110,7 @@ export class AppComponent implements OnDestroy, OnInit {
   ): void => {
     const { succeeded, message } = response;
     if (!succeeded) {
-      alert(isPopulated(message) ? message : 'Operation failed.');
+      alert(isPopulated(message) ? message : failureMessage);
       return;
     }
     this.getSavedConnections();
@@ -119,7 +121,7 @@ export class AppComponent implements OnDestroy, OnInit {
   ): void => {
     const { succeeded, message } = response;
     if (!succeeded) {
-      alert(isPopulated(message) ? message : 'Operation failed.');
+      alert(isPopulated(message) ? message : failureMessage);
       return;
     }
   };

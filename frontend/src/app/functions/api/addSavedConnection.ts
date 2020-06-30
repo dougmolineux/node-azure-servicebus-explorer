@@ -5,9 +5,9 @@ import { ApiConnectionConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
 import { noteError } from './noteError';
 
-const handleError = (error: any): Observable<any> => {
-  noteError('add saved connection', error);
-  return of();
+const handleError = (error: any): Observable<ApiResponse> => {
+  const message = noteError({ action: 'add saved connection', error });
+  return of({ succeeded: false, message });
 };
 
 export const addSavedConnection = ({
@@ -16,5 +16,5 @@ export const addSavedConnection = ({
   connection,
 }: ApiConnectionConfig): Observable<ApiResponse> =>
   http
-    .post(`${url}/${ApiRoutes.env}`, connection)
+    .post<ApiResponse>(`${url}/${ApiRoutes.env}`, connection)
     .pipe(catchError(handleError));
