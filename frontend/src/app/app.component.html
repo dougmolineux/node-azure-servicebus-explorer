@@ -11,7 +11,7 @@
       [ngClass]="{ 'is-active': connection.isActive }"
     >
       <span (click)="selectConnection(connection)" class="name">
-        {{ connection.topic }} - {{ connection.sub }}
+        {{ connectionName(connection) }}
       </span>
       <span *ngIf="connection.isActive" class="bold">
         [Active]

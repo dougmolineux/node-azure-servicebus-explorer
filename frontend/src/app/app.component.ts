@@ -11,6 +11,9 @@ import {
 import { API, ApiResponse, Connection } from './structs';
 import { emptyApiResponse, emptyConnection } from './structs/mocks';
 
+const deleteMessage = (connectionName: string): string =>
+  `Delete saved connection?\n\n${connectionName}`;
+
 const failureMessage = 'Operation failed.';
 
 @Component({
@@ -59,6 +62,9 @@ export class AppComponent implements OnDestroy, OnInit {
     );
   };
 
+  public connectionName = (connection: Connection): string =>
+    `${connection.topic} - ${connection.sub}`;
+
   public selectConnection = (connection: Connection): void => {
     if (connection.isActive) {
       return;
@@ -76,6 +82,9 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   public deleteConnection = (connection: Connection): void => {
+    if (!confirm(deleteMessage(this.connectionName(connection)))) {
+      return;
+    }
     console.log('deleting connection', connection);
   };
 
