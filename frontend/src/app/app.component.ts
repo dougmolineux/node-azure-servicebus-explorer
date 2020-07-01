@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import {
   getApi,
   isConnectionValid,
+  isDefined,
   isPopulated,
   processMessages,
 } from './functions';
@@ -27,13 +28,15 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private subscriptions = new Subscription();
   private api: API;
+  private shouldGetMessages = false;
+  private shouldKillServer = false;
 
   constructor(private http: HttpClient) {
     this.api = getApi(this.http);
   }
 
   public ngOnInit(): void {
-    this.getSavedConnections();
+    this.getSavedConnectionsAndGetMessages();
   }
 
   public ngOnDestroy(): void {
@@ -72,25 +75,46 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptions.remove(subscription);
   };
 
-  private getSavedConnections = (shouldKillServer = false): void => {
+  private getSavedConnections = (): void => {
     this.isLoadingSavedConnections = true;
     const subscription = this.subscriptions.add(
       this.api.getSavedConnections().subscribe((savedConnections): void => {
         this.isLoadingSavedConnections = false;
         this.handleSavedConnections(savedConnections);
         this.unsubscribe(subscription);
-        if (shouldKillServer) {
-          this.killServer();
-        }
       })
     );
+  };
+
+  private getSavedConnectionsAndGetMessages = (): void => {
+    this.shouldGetMessages = true;
+    this.getSavedConnections();
+  };
+
+  private getSavedConnectionsAndKillServer = (): void => {
+    this.shouldKillServer = true;
+    this.getSavedConnections();
   };
 
   private handleSavedConnections = (
     savedConnections: Connection[] = []
   ): void => {
     this.savedConnections = savedConnections;
+    this.handleSavedConnectionsAfterEffects();
   };
+
+  private handleSavedConnectionsAfterEffects = (): void => {
+    if (this.shouldKillServer) {
+      this.killServer();
+    } else if (this.shouldGetMessages && this.isActiveConnection()) {
+      this.getMessages();
+    }
+    this.shouldGetMessages = false;
+    this.shouldKillServer = false;
+  };
+
+  private isActiveConnection = (): boolean =>
+    isDefined(this.savedConnections.find((x) => x.isActive));
 
   private getMessages = (): void => {
     this.messages = [];
@@ -127,7 +151,7 @@ export class AppComponent implements OnDestroy, OnInit {
       alert(isPopulated(message) ? message : failureMessage);
       return;
     }
-    this.getSavedConnections(true);
+    this.getSavedConnectionsAndKillServer();
   };
 
   private killServer = (): void => {
