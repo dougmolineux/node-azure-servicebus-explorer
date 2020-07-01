@@ -20,7 +20,7 @@ const failureMessage = 'Operation failed.';
 })
 export class AppComponent implements OnDestroy, OnInit {
   public title = 'node-azure-servicebus-explorer-fe';
-  public connection = emptyConnection;
+  public connection = { ...emptyConnection };
   public isLoadingSavedConnections = false;
   public savedConnections: Connection[] = [];
   public isActiveSavedConnection = false;
@@ -142,6 +142,7 @@ export class AppComponent implements OnDestroy, OnInit {
       return;
     }
     this.selectConnection(this.connection);
+    this.connection = { ...emptyConnection };
   };
 
   private handleSelectConnectionResponse = (
