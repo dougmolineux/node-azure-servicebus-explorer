@@ -32,7 +32,10 @@
   <button (click)="addSavedConnection()">Add Service Bus Connection</button>
   <div *ngIf="isLoadingMessages" class="mask"></div>
 </div>
-<div class="messages">
+<h2 *ngIf="!isActiveSavedConnection">
+  Please select or add a saved connection.
+</h2>
+<div *ngIf="isActiveSavedConnection" class="messages">
   <h2>Azure Service Bus Topic Messages</h2>
   <div *ngIf="isLoadingMessages">Loading...</div>
   <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>

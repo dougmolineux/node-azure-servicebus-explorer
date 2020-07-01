@@ -23,6 +23,7 @@ export class AppComponent implements OnDestroy, OnInit {
   public connection = emptyConnection;
   public isLoadingSavedConnections = false;
   public savedConnections: Connection[] = [];
+  public isActiveSavedConnection = false;
   public isLoadingMessages = false;
   public messages: string[] = [];
 
@@ -100,21 +101,21 @@ export class AppComponent implements OnDestroy, OnInit {
     savedConnections: Connection[] = []
   ): void => {
     this.savedConnections = savedConnections;
+    this.isActiveSavedConnection = isDefined(
+      this.savedConnections.find((x) => x.isActive)
+    );
     this.handleSavedConnectionsAfterEffects();
   };
 
   private handleSavedConnectionsAfterEffects = (): void => {
     if (this.shouldKillServer) {
       this.killServer();
-    } else if (this.shouldGetMessages && this.isActiveConnection()) {
+    } else if (this.shouldGetMessages && this.isActiveSavedConnection) {
       this.getMessages();
     }
     this.shouldGetMessages = false;
     this.shouldKillServer = false;
   };
-
-  private isActiveConnection = (): boolean =>
-    isDefined(this.savedConnections.find((x) => x.isActive));
 
   private getMessages = (): void => {
     this.messages = [];
