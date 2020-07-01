@@ -43,6 +43,14 @@ li {
   font-weight: bold;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .saved-connections,
 .add-saved-connection {
   position: relative;
@@ -74,6 +82,11 @@ li {
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    span {
+      display: inline-block;
+      margin-right: 10px;
     }
   }
 }

@@ -13,7 +13,15 @@
       <span (click)="selectConnection(connection)" class="name">
         {{ connection.topic }} - {{ connection.sub }}
       </span>
-      <span *ngIf="connection.isActive" class="bold">[Active]</span>
+      <span *ngIf="connection.isActive" class="bold">
+        [Active]
+      </span>
+      <span (click)="editConnection(connection)" class="underline pointer">
+        Edit
+      </span>
+      <span (click)="deleteConnection(connection)" class="underline pointer">
+        Delete
+      </span>
     </li>
   </ul>
   <div *ngIf="isLoadingMessages" class="mask"></div>

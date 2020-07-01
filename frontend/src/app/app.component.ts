@@ -71,6 +71,14 @@ export class AppComponent implements OnDestroy, OnInit {
     );
   };
 
+  public editConnection = (connection: Connection): void => {
+    console.log('editing connection', connection);
+  };
+
+  public deleteConnection = (connection: Connection): void => {
+    console.log('deleting connection', connection);
+  };
+
   private unsubscribe = (subscription: Subscription): void => {
     subscription.unsubscribe();
     this.subscriptions.remove(subscription);
