@@ -39,6 +39,10 @@ li {
   }
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .saved-connections,
 .add-saved-connection {
   position: relative;
@@ -64,16 +68,12 @@ li {
   }
 
   li {
-    &:not(.is-active) {
+    &:not(.is-active) .name {
       cursor: pointer;
 
       &:hover {
         text-decoration: underline;
       }
-    }
-
-    span {
-      font-weight: bold;
     }
   }
 }

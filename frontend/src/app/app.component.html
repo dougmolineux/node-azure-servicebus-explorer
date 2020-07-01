@@ -9,10 +9,11 @@
     <li
       *ngFor="let connection of savedConnections"
       [ngClass]="{ 'is-active': connection.isActive }"
-      (click)="selectConnection(connection)"
     >
-      {{ connection.topic }} - {{ connection.sub }}
-      <span *ngIf="connection.isActive">[Active]</span>
+      <span (click)="selectConnection(connection)" class="name">
+        {{ connection.topic }} - {{ connection.sub }}
+      </span>
+      <span *ngIf="connection.isActive" class="bold">[Active]</span>
     </li>
   </ul>
   <div *ngIf="isLoadingMessages" class="mask"></div>
