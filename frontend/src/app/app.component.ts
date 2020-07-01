@@ -11,8 +11,8 @@ import {
 import { API, ApiResponse, Connection } from './structs';
 import { emptyApiResponse, emptyConnection } from './structs/mocks';
 
-const deleteMessage = (connectionName: string): string =>
-  `Delete saved connection?\n\n${connectionName}`;
+const removeMessage = (connectionName: string): string =>
+  `Remove saved connection?\n\n${connectionName}`;
 
 const failureMessage = 'Operation failed.';
 
@@ -81,8 +81,8 @@ export class AppComponent implements OnDestroy, OnInit {
     console.log('editing connection', connection);
   };
 
-  public deleteConnection = (connection: Connection): void => {
-    if (!confirm(deleteMessage(this.connectionName(connection)))) {
+  public removeSavedConnection = (connection: Connection): void => {
+    if (!confirm(removeMessage(this.connectionName(connection)))) {
       return;
     }
     console.log('deleting connection', connection);
