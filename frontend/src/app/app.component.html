@@ -50,16 +50,18 @@
   </div>
   <div *ngIf="isLoadingMessages" class="mask"></div>
 </div>
-<h2 *ngIf="!isActiveSavedConnection">
-  Please select or add a saved connection.
-</h2>
-<div *ngIf="isActiveSavedConnection" class="messages">
-  <h2>Azure Service Bus Topic Messages</h2>
-  <div *ngIf="isLoadingMessages">Loading...</div>
-  <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
-  <ol>
-    <li *ngFor="let message of messages">{{ message }}</li>
-  </ol>
+<div class="messages">
+  <h2 *ngIf="!isActiveSavedConnection">
+    Please select or add a saved connection.
+  </h2>
+  <div *ngIf="isActiveSavedConnection">
+    <h2>Azure Service Bus Topic Messages</h2>
+    <div *ngIf="isLoadingMessages">Loading...</div>
+    <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
+    <ol>
+      <li *ngFor="let message of messages">{{ message }}</li>
+    </ol>
+  </div>
   <div *ngIf="isEditing" class="mask"></div>
 </div>
 <!-- <router-outlet></router-outlet> -->
