@@ -27,7 +27,7 @@
       </span>
     </li>
   </ul>
-  <div *ngIf="isLoadingMessages" class="mask"></div>
+  <div *ngIf="isLoadingMessages || isEditing" class="mask"></div>
 </div>
 <div class="add-saved-connection">
   <input
@@ -41,7 +41,13 @@
     placeholder="Subscription Name"
     [(ngModel)]="connection.sub"
   />
-  <button (click)="addSavedConnection()">Add Service Bus Connection</button>
+  <button *ngIf="!isEditing" (click)="addSavedConnection()">
+    Add Service Bus Connection
+  </button>
+  <div *ngIf="isEditing">
+    <button (click)="submitEdit()">Save</button>
+    <button (click)="exitEdit()">Cancel</button>
+  </div>
   <div *ngIf="isLoadingMessages" class="mask"></div>
 </div>
 <h2 *ngIf="!isActiveSavedConnection">
@@ -54,5 +60,6 @@
   <ol>
     <li *ngFor="let message of messages">{{ message }}</li>
   </ol>
+  <div *ngIf="isEditing" class="mask"></div>
 </div>
 <!-- <router-outlet></router-outlet> -->

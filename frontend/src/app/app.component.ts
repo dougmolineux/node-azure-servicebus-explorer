@@ -29,12 +29,14 @@ export class AppComponent implements OnDestroy, OnInit {
   public isActiveSavedConnection = false;
   public isLoadingMessages = false;
   public messages: string[] = [];
+  public isEditing = false;
 
   private subscriptions = new Subscription();
   private api: API;
   private shouldResetMessages = false;
   private shouldGetMessages = false;
   private shouldKillServer = false;
+  private connectionToEdit = { ...emptyConnection };
 
   constructor(private http: HttpClient) {
     this.api = getApi(this.http);
@@ -79,7 +81,19 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   public editConnection = (connection: Connection): void => {
-    console.log('editing connection', connection);
+    this.isEditing = true;
+    this.connectionToEdit = { ...connection };
+    this.connection = { ...connection };
+  };
+
+  public submitEdit = (): void => {
+    console.log('submitting edit', this.connectionToEdit, this.connection);
+  };
+
+  public exitEdit = (): void => {
+    this.isEditing = false;
+    this.connectionToEdit = { ...emptyConnection };
+    this.connection = { ...emptyConnection };
   };
 
   public removeSavedConnection = (connection: Connection): void => {
