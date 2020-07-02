@@ -32,6 +32,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   private subscriptions = new Subscription();
   private api: API;
+  private shouldResetMessages = false;
   private shouldGetMessages = false;
   private shouldKillServer = false;
 
@@ -85,6 +86,7 @@ export class AppComponent implements OnDestroy, OnInit {
     if (!confirm(removeMessage(this.connectionName(connection)))) {
       return;
     }
+    this.shouldResetMessages = connection.isActive;
     const subscription = this.subscriptions.add(
       this.api.removeSavedConnection(connection).subscribe((response): void => {
         this.handleRemoveSavedConnectionResponse(response);
@@ -130,11 +132,15 @@ export class AppComponent implements OnDestroy, OnInit {
   };
 
   private handleSavedConnectionsAfterEffects = (): void => {
+    if (this.shouldResetMessages) {
+      this.messages = [];
+    }
     if (this.shouldKillServer) {
       this.killServer();
     } else if (this.shouldGetMessages && this.isActiveSavedConnection) {
       this.getMessages();
     }
+    this.shouldResetMessages = false;
     this.shouldGetMessages = false;
     this.shouldKillServer = false;
   };
@@ -201,11 +207,12 @@ export class AppComponent implements OnDestroy, OnInit {
   private handleRemoveSavedConnectionResponse = (
     response: ApiResponse = emptyApiResponse
   ): void => {
-    console.log('response', response);
     const { succeeded, message } = response;
     if (!succeeded) {
       alert(isPopulated(message) ? message : failureMessage);
+      this.shouldResetMessages = false;
       return;
     }
+    this.getSavedConnections();
   };
 }
