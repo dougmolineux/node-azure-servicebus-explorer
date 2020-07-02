@@ -80,20 +80,14 @@ export class AppComponent implements OnDestroy, OnInit {
     );
   };
 
-  public editConnection = (connection: Connection): void => {
-    this.isEditing = true;
-    this.connectionToEdit = { ...connection };
-    this.connection = { ...connection };
+  public toggleEdit = (connection: Connection = null): void => {
+    this.isEditing = connection !== null;
+    this.connectionToEdit = { ...(connection || emptyConnection) };
+    this.connection = { ...this.connectionToEdit };
   };
 
   public submitEdit = (): void => {
     console.log('submitting edit', this.connectionToEdit, this.connection);
-  };
-
-  public exitEdit = (): void => {
-    this.isEditing = false;
-    this.connectionToEdit = { ...emptyConnection };
-    this.connection = { ...emptyConnection };
   };
 
   public removeSavedConnection = (connection: Connection): void => {

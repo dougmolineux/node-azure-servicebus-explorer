@@ -16,7 +16,7 @@
       <span *ngIf="connection.isActive" class="bold">
         [Active]
       </span>
-      <span (click)="editConnection(connection)" class="underline pointer">
+      <span (click)="toggleEdit(connection)" class="underline pointer">
         Edit
       </span>
       <span
@@ -46,7 +46,7 @@
   </button>
   <div *ngIf="isEditing">
     <button (click)="submitEdit()">Submit Edit</button>
-    <button (click)="exitEdit()">Cancel</button>
+    <button (click)="toggleEdit()">Cancel</button>
   </div>
   <div *ngIf="isLoadingMessages" class="mask"></div>
 </div>
