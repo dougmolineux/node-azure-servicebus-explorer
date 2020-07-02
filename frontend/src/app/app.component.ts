@@ -202,5 +202,10 @@ export class AppComponent implements OnDestroy, OnInit {
     response: ApiResponse = emptyApiResponse
   ): void => {
     console.log('response', response);
+    const { succeeded, message } = response;
+    if (!succeeded) {
+      alert(isPopulated(message) ? message : failureMessage);
+      return;
+    }
   };
 }
