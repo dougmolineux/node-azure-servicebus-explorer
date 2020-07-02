@@ -12,5 +12,5 @@ export interface API {
   getTopics: () => Observable<any[]>;
   killServer: () => Observable<ApiResponse>;
   removeSavedConnection: (connection: Connection) => Observable<ApiResponse>;
-  selectConnection: (connection: Connection) => Observable<ApiResponse>;
+  selectSavedConnection: (connection: Connection) => Observable<ApiResponse>;
 }

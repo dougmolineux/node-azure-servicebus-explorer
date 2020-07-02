@@ -7,11 +7,11 @@ import { noteError } from './noteError';
 import { simplify } from './simplify';
 
 const handleError = (error: any): Observable<ApiResponse> => {
-  const message = noteError({ action: 'select connection', error });
+  const message = noteError({ action: 'select saved connection', error });
   return of({ succeeded: false, message });
 };
 
-export const selectConnection = ({
+export const selectSavedConnection = ({
   http,
   url,
   connection,

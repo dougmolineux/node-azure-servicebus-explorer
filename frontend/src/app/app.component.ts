@@ -66,13 +66,13 @@ export class AppComponent implements OnDestroy, OnInit {
   public connectionName = (connection: Connection): string =>
     `${connection.topic} - ${connection.sub}`;
 
-  public selectConnection = (connection: Connection): void => {
+  public selectSavedConnection = (connection: Connection): void => {
     if (connection.isActive) {
       return;
     }
     const subscription = this.subscriptions.add(
-      this.api.selectConnection(connection).subscribe((response): void => {
-        this.handleSelectConnectionResponse(response);
+      this.api.selectSavedConnection(connection).subscribe((response): void => {
+        this.handleSelectSavedConnectionResponse(response);
         this.unsubscribe(subscription);
       })
     );
@@ -169,11 +169,11 @@ export class AppComponent implements OnDestroy, OnInit {
       alert(isPopulated(message) ? message : failureMessage);
       return;
     }
-    this.selectConnection(this.connection);
+    this.selectSavedConnection(this.connection);
     this.connection = { ...emptyConnection };
   };
 
-  private handleSelectConnectionResponse = (
+  private handleSelectSavedConnectionResponse = (
     response: ApiResponse = emptyApiResponse
   ): void => {
     const { succeeded, message } = response;

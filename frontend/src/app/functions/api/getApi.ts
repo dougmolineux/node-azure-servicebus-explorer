@@ -5,7 +5,7 @@ import { getSavedConnections } from './getSavedConnections';
 import { getTopics } from './getTopics';
 import { killServer } from './killServer';
 import { removeSavedConnection } from './removeSavedConnection';
-import { selectConnection } from './selectConnection';
+import { selectSavedConnection } from './selectSavedConnection';
 
 const defaultUrl = 'http://localhost:3000';
 
@@ -17,6 +17,6 @@ export const getApi = (http: HttpClient, url = defaultUrl): API => ({
   killServer: () => killServer({ http, url }),
   removeSavedConnection: (connection: Connection) =>
     removeSavedConnection({ http, url, connection }),
-  selectConnection: (connection: Connection) =>
-    selectConnection({ http, url, connection }),
+  selectSavedConnection: (connection: Connection) =>
+    selectSavedConnection({ http, url, connection }),
 });
