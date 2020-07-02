@@ -85,7 +85,12 @@ export class AppComponent implements OnDestroy, OnInit {
     if (!confirm(removeMessage(this.connectionName(connection)))) {
       return;
     }
-    console.log('deleting connection', connection);
+    const subscription = this.subscriptions.add(
+      this.api.removeSavedConnection(connection).subscribe((response): void => {
+        this.handleRemoveSavedConnectionResponse(response);
+        this.unsubscribe(subscription);
+      })
+    );
   };
 
   private unsubscribe = (subscription: Subscription): void => {
@@ -191,5 +196,11 @@ export class AppComponent implements OnDestroy, OnInit {
       return;
     }
     this.getMessages();
+  };
+
+  private handleRemoveSavedConnectionResponse = (
+    response: ApiResponse = emptyApiResponse
+  ): void => {
+    console.log('response', response);
   };
 }

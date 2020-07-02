@@ -7,15 +7,17 @@ import { noteError } from './noteError';
 import { simplify } from './simplify';
 
 const handleError = (error: any): Observable<ApiResponse> => {
-  const message = noteError({ action: 'add saved connection', error });
+  const message = noteError({ action: 'remove saved connection', error });
   return of({ succeeded: false, message });
 };
 
-export const addSavedConnection = ({
+export const removeSavedConnection = ({
   http,
   url,
   connection,
 }: ApiConnectionConfig): Observable<ApiResponse> =>
   http
-    .post<ApiResponse>(`${url}/${ApiRoutes.env}`, simplify(connection))
+    .request<ApiResponse>('DELETE', `${url}/${ApiRoutes.env}`, {
+      body: simplify(connection),
+    })
     .pipe(catchError(handleError));
