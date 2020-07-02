@@ -86,7 +86,11 @@ export class AppComponent implements OnDestroy, OnInit {
     this.connection = { ...this.connectionToEdit };
   };
 
-  public submitEdit = (): void => {
+  public editConnection = (): void => {
+    if (![this.connection, this.connectionToEdit].every(isConnectionValid)) {
+      alert('Connection info is incomplete or invalid.');
+      return;
+    }
     console.log('submitting edit', this.connectionToEdit, this.connection);
   };
 

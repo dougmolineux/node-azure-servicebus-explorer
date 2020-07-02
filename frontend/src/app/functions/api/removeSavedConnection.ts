@@ -1,10 +1,10 @@
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ApiResponse } from '../../structs';
+import { simplify } from '../simplify';
 import { ApiConnectionConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
 import { noteError } from './noteError';
-import { simplify } from './simplify';
 
 const handleError = (error: any): Observable<ApiResponse> => {
   const message = noteError({ action: 'remove saved connection', error });

@@ -1,4 +1,4 @@
-import { Connection } from '../../structs';
+import { Connection } from '../structs';
 
 /** Removes metadata. */
 export const simplify = (connection: Connection): Connection => {
