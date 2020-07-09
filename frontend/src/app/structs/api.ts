@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Connection } from './connection';
+import { Connection, EditSavedConnection } from './connection';
 
 export interface ApiResponse {
   succeeded: boolean;
@@ -8,6 +8,7 @@ export interface ApiResponse {
 
 export interface API {
   addSavedConnection: (connection: Connection) => Observable<ApiResponse>;
+  editSavedConnection: (config: EditSavedConnection) => Observable<ApiResponse>;
   getSavedConnections: () => Observable<Connection[]>;
   getTopics: () => Observable<any[]>;
   killServer: () => Observable<ApiResponse>;

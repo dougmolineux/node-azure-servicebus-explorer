@@ -4,3 +4,8 @@ export interface Connection {
   sub: string;
   isActive?: boolean;
 }
+
+export interface EditSavedConnection {
+  oldVersion: Connection;
+  newVersion: Connection;
+}

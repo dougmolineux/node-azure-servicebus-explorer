@@ -86,12 +86,22 @@ export class AppComponent implements OnDestroy, OnInit {
     this.connection = { ...this.connectionToEdit };
   };
 
-  public editConnection = (): void => {
+  public editSavedConnection = (): void => {
     if (![this.connection, this.connectionToEdit].every(isConnectionValid)) {
       alert('Connection info is incomplete or invalid.');
       return;
     }
-    console.log('submitting edit', this.connectionToEdit, this.connection);
+    const subscription = this.subscriptions.add(
+      this.api
+        .editSavedConnection({
+          oldVersion: this.connectionToEdit,
+          newVersion: this.connection,
+        })
+        .subscribe((response): void => {
+          this.handleEditSavedConnectionResponse(response);
+          this.unsubscribe(subscription);
+        })
+    );
   };
 
   public removeSavedConnection = (connection: Connection): void => {
@@ -214,6 +224,18 @@ export class AppComponent implements OnDestroy, OnInit {
       return;
     }
     this.getMessages();
+  };
+
+  private handleEditSavedConnectionResponse = (
+    response: ApiResponse = emptyApiResponse
+  ): void => {
+    const { succeeded, message } = response;
+    if (!succeeded) {
+      alert(isPopulated(message) ? message : failureMessage);
+      return;
+    }
+    this.toggleEdit();
+    this.getSavedConnections();
   };
 
   private handleRemoveSavedConnectionResponse = (
