@@ -234,8 +234,9 @@ export class AppComponent implements OnDestroy, OnInit {
       alert(isPopulated(message) ? message : failureMessage);
       return;
     }
-    this.toggleEdit();
     this.getSavedConnections();
+    this.selectSavedConnection({ ...this.connection, isActive: false });
+    this.toggleEdit();
   };
 
   private handleRemoveSavedConnectionResponse = (
