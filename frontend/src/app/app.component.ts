@@ -6,6 +6,7 @@ import {
   isConnectionValid,
   isDefined,
   isPopulated,
+  isShallowMatch,
   processMessages,
 } from './functions';
 import { API, ApiResponse, Connection } from './structs';
@@ -89,6 +90,11 @@ export class AppComponent implements OnDestroy, OnInit {
   public editSavedConnection = (): void => {
     if (![this.connection, this.connectionToEdit].every(isConnectionValid)) {
       alert('Connection info is incomplete or invalid.');
+      return;
+    } else if (
+      isShallowMatch<Connection>(this.connection, this.connectionToEdit)
+    ) {
+      alert('Connection info is unchanged.');
       return;
     }
     const subscription = this.subscriptions.add(
