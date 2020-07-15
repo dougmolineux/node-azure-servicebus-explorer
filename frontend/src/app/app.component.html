@@ -1,4 +1,16 @@
 <h1>{{ title }}</h1>
+<div class="saved-connections">
+  <h2>Saved Connections</h2>
+  <div *ngIf="isLoadingSavedConnections">Loading...</div>
+  <ul>
+    <li *ngFor="let connection of savedConnections">
+      {{ connection.topic }} - {{ connection.sub }}
+      <span *ngIf="connection.isActive" style="font-weight: bold;">
+        [Active]</span
+      >
+    </li>
+  </ul>
+</div>
 <input
   type="text"
   placeholder="Connection String"

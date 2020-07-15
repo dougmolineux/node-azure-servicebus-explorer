@@ -2,39 +2,29 @@ const Koa = require('koa');
 const cors = require('@koa/cors');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
-const fs = require('fs').promises;
-
-const topicPeek = require('./topic-peek');
+const {
+  addSavedConnection,
+  editSavedConnection,
+  getSavedConnections,
+  kill,
+  peek,
+  removeSavedConnection,
+  setEnvToConnection,
+} = require('./functions');
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/peek', peek).post('/set-env', setEnv).post('/kill', kill);
+const routes = { peek: '/peek', env: '/env', kill: '/kill' };
 
-async function peek(ctx) {
-  ctx.body = await topicPeek.peek();
-}
-
-async function setEnv(ctx) {
-  const envVars = ctx.request.body;
-
-  const data = `SERVICE_BUS_CONNECTION_STRING=${envVars.connString}
-TOPIC_NAME=${envVars.topic}
-SUBSCRIPTION_NAME=${envVars.sub}`;
-
-  try {
-    await fs.writeFile('.env', data);
-  } catch (error) {
-    console.log(error);
-  }
-
-  ctx.body = ctx.request.body;
-}
-
-async function kill(ctx) {
-  setTimeout(process.exit);
-  ctx.body = { status: 200 };
-}
+router
+  .get(routes.peek, peek)
+  .get(routes.env, getSavedConnections)
+  .post(routes.env, addSavedConnection)
+  .put(routes.env, setEnvToConnection)
+  .delete(routes.env, removeSavedConnection)
+  .patch(routes.env, editSavedConnection)
+  .post(routes.kill, kill);
 
 app
   .use(cors())
