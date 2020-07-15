@@ -6,8 +6,8 @@ import { ApiRoutes } from './apiRoutes';
 import { noteError } from './noteError';
 import { retryGet } from './retryGet';
 
-const handleError = (error: any): Observable<any> => {
-  noteError('get saved connections', error);
+const handleError = (error: any): Observable<Connection[]> => {
+  noteError({ action: 'get saved connections', error, shouldAlert: true });
   return of([]);
 };
 
@@ -15,7 +15,7 @@ export const getSavedConnections = ({
   http,
   url,
 }: ApiConfig): Observable<Connection[]> =>
-  http.get(`${url}/${ApiRoutes.env}`).pipe(
+  http.get<Connection[]>(`${url}/${ApiRoutes.env}`).pipe(
     retryWhen((errors) => errors.pipe(mergeMap(retryGet))),
     catchError(handleError)
   );

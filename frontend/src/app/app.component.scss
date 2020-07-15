@@ -13,6 +13,10 @@ h2 {
   margin: 8px 0;
 }
 
+ul {
+  margin-top: 0;
+}
+
 input {
   width: 100%;
   margin-bottom: 5px;
@@ -32,5 +36,64 @@ li {
 
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.saved-connections,
+.add-saved-connection,
+.messages {
+  position: relative;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(2px);
+}
+
+.saved-connections {
+  h2,
+  .loading {
+    display: inline-block;
+  }
+
+  .loading {
+    margin-left: 10px;
+  }
+
+  li {
+    &:not(.is-active) .name {
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    span {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+}
+
+.add-saved-connection {
+  button {
+    margin-right: 5px;
   }
 }

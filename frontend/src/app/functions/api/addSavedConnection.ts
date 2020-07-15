@@ -1,16 +1,21 @@
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ApiResponse } from '../../structs';
-import { ApiConfig } from './apiConfig';
+import { simplify } from '../simplify';
+import { ApiConnectionConfig } from './apiConfig';
 import { ApiRoutes } from './apiRoutes';
 import { noteError } from './noteError';
 
 const handleError = (error: any): Observable<ApiResponse> => {
-  const message = noteError({ action: 'restart server', error });
+  const message = noteError({ action: 'add saved connection', error });
   return of({ succeeded: false, message });
 };
 
-export const killServer = ({ http, url }: ApiConfig): Observable<ApiResponse> =>
+export const addSavedConnection = ({
+  http,
+  url,
+  connection,
+}: ApiConnectionConfig): Observable<ApiResponse> =>
   http
-    .post<ApiResponse>(`${url}/${ApiRoutes.kill}`, null)
+    .post<ApiResponse>(`${url}/${ApiRoutes.env}`, simplify(connection))
     .pipe(catchError(handleError));

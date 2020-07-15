@@ -1,28 +1,67 @@
 <h1>{{ title }}</h1>
 <div class="saved-connections">
   <h2>Saved Connections</h2>
-  <div *ngIf="isLoadingSavedConnections">Loading...</div>
+  <div *ngIf="isLoadingSavedConnections" class="loading">Loading...</div>
+  <div *ngIf="!isLoadingSavedConnections && !savedConnections.length">
+    No saved connections.
+  </div>
   <ul>
-    <li *ngFor="let connection of savedConnections">
-      {{ connection.topic }} - {{ connection.sub }}
-      <span *ngIf="connection.isActive" style="font-weight: bold;">
-        [Active]</span
+    <li
+      *ngFor="let connection of savedConnections"
+      [ngClass]="{ 'is-active': connection.isActive }"
+    >
+      <span (click)="selectSavedConnection(connection)" class="name">
+        {{ connectionName(connection) }}
+      </span>
+      <span *ngIf="connection.isActive" class="bold">
+        [Active]
+      </span>
+      <span (click)="toggleEdit(connection)" class="underline pointer">
+        Edit
+      </span>
+      <span
+        (click)="removeSavedConnection(connection)"
+        class="underline pointer"
       >
+        Remove
+      </span>
     </li>
   </ul>
+  <div *ngIf="isLoadingMessages || isEditing" class="mask"></div>
 </div>
-<input
-  type="text"
-  placeholder="Connection String"
-  [(ngModel)]="env.connString"
-/>
-<input type="text" placeholder="Topic Name" [(ngModel)]="env.topic" />
-<input type="text" placeholder="Subscription Name" [(ngModel)]="env.sub" />
-<button (click)="updateConnection()">Update Service Bus Connection</button>
-<h2>Azure Service Bus Topic Messages</h2>
-<div *ngIf="isLoadingMessages">Loading...</div>
-<div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
-<ol>
-  <li *ngFor="let message of messages">{{ message }}</li>
-</ol>
+<div class="add-saved-connection">
+  <input
+    type="text"
+    placeholder="Connection String"
+    [(ngModel)]="connection.connString"
+  />
+  <input type="text" placeholder="Topic Name" [(ngModel)]="connection.topic" />
+  <input
+    type="text"
+    placeholder="Subscription Name"
+    [(ngModel)]="connection.sub"
+  />
+  <button *ngIf="!isEditing" (click)="addSavedConnection()">
+    Add Service Bus Connection
+  </button>
+  <div *ngIf="isEditing">
+    <button (click)="editSavedConnection()">Submit Edit</button>
+    <button (click)="toggleEdit()">Cancel</button>
+  </div>
+  <div *ngIf="isLoadingMessages" class="mask"></div>
+</div>
+<div class="messages">
+  <h2 *ngIf="!isActiveSavedConnection">
+    Please select or add a saved connection.
+  </h2>
+  <div *ngIf="isActiveSavedConnection">
+    <h2>Azure Service Bus Topic Messages</h2>
+    <div *ngIf="isLoadingMessages">Loading...</div>
+    <div *ngIf="!isLoadingMessages && !messages.length">No messages.</div>
+    <ol>
+      <li *ngFor="let message of messages">{{ message }}</li>
+    </ol>
+  </div>
+  <div *ngIf="isEditing" class="mask"></div>
+</div>
 <!-- <router-outlet></router-outlet> -->
