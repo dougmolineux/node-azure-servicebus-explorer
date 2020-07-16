@@ -8,8 +8,8 @@
     "frontend": "frontend"
   },
   "scripts": {
-    "install-backend": "cd $npm_package_paths_backend && npm i",
-    "install-frontend": "cd $npm_package_paths_frontend && npm i",
+    "install-backend": "cd $npm_package_paths_backend && npm ci",
+    "install-frontend": "cd $npm_package_paths_frontend && npm ci",
     "install-app": "npm run install-backend && npm run install-frontend",
     "test-backend": "cd $npm_package_paths_backend && npm test",
     "test-frontend": "cd $npm_package_paths_frontend && npm test",
